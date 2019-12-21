@@ -7,13 +7,11 @@ use \PDOException;
 use CarRental\Core\Config;
 use CarRental\Utils\Singleton;
 
-class Database extends Singleton {
+class Database {
     public $handler;
 
-    protected function __construct() {
+    public function __construct($config) {
         try {
-            $config = Config::getInstance()->get('database');
-
             $this->handler = new PDO(
                 $config['type'] . ':' .
                 'host=' . $config['host'] .

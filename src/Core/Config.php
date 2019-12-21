@@ -4,11 +4,11 @@ namespace CarRental\Core;
 use CarRental\Utils\Singleton;
 use CarRental\Exceptions\NotFoundException;
 
-class Config extends Singleton {
+class Config {
     // Config data is stored here
     private $data;
 
-    protected function __construct() {
+    public function __construct() {
         // Load config file and decode
         $json = file_get_contents(__DIR__ . "/../../config/app.json");
         $this->data = json_decode($json, true);
