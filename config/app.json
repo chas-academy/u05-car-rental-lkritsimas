@@ -1,0 +1,9 @@
+{
+    "database": {
+        "type": "mysql",
+        "host": "localhost",
+        "database": "u05-car-rental",
+        "user": "root",
+        "password": "secret"
+    }
+}
