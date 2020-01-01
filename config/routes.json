@@ -1,0 +1,30 @@
+{
+    "vehicle/new": {
+        "controller": "VehicleController",
+        "method": "newVehicle"
+    },
+    "vehicle/created": {
+        "controller": "VehicleController",
+        "method": "add"
+    },
+    "vehicle/remove/{id}": {
+        "controller": "VehicleController",
+        "method": "remove"
+    },
+    "vehicle": {
+        "controller": "VehicleController",
+        "method": "get"
+    },
+    "history": {
+        "controller": "HistoryController",
+        "method": "get"
+    },
+    "customer": {
+        "controller": "CustomerController",
+        "method": "get"
+    },
+    "": {
+        "controller": "IndexController",
+        "method": "test"
+    }
+}

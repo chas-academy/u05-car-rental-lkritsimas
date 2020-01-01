@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/css/main.css" />
+        <title>
+            {% if title is defined %} {{ title }} - {% endif %} RentACar
+        </title>
+        {% endblock %}
+    </head>
+    <body>
+        <header>
+            <h1>RentACar</h1>
+            {{ include("Navbar.html.twig") }}
+        </header>
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        <footer>
+            Todo: Add footer
+        </footer>
+        <script src="/assets/js/scripts.js" type="module"></script>
+    </body>
+</html>
