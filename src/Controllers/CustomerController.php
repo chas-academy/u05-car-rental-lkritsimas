@@ -16,4 +16,14 @@ class CustomerController extends AbstractController
       "customers" => $customers
     ]);
   }
+
+  public function remove()
+  {
+    $data = $this->request->getData();
+
+    $customerModel = new customerModel($this->db);
+    $customerRemoved = $customerModel->removeCustomer($data["id"]);
+
+    return json_encode(["success" => $customerRemoved]);
+  }
 }

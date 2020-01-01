@@ -23,6 +23,10 @@
         "controller": "CustomerController",
         "method": "get"
     },
+    "customers/remove/{id}": {
+        "controller": "CustomerController",
+        "method": "remove"
+    },
     "": {
         "controller": "IndexController",
         "method": "test"

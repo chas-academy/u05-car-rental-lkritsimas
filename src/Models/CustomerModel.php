@@ -48,4 +48,28 @@ class CustomerModel extends AbstractModel
 
     return $result;
   }
+
+  public function removeCustomer($id)
+  {
+    $result = [];
+    $query = "DELETE FROM customers WHERE id = :id";
+
+    try {
+      // Perform query
+      $statement = $this->db->prepare($query);
+      $statement->execute([":id" => strtoupper($id)]);
+
+      $result = $statement->rowCount();
+
+      // Throw exception if query fails
+      // if (!$result) throw new DatabaseException($this->db->errorInfo());
+    } catch (\PDOException $e) {
+      $this->di->get("Twig_Environment")->render("Error.html.twig", [
+        "code" => $e->getCode(),
+        "message" => $e->getMessage()
+      ]);
+    }
+
+    return $result;
+  }
 }
