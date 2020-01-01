@@ -1,0 +1,41 @@
+.btn,
+button {
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background-color: #247cff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 12px;
+    // text-transform: uppercase;
+
+    &:disabled {
+        cursor: default;
+        color: #999;
+        background-color: #e6e6e6;
+
+        &.link {
+            cursor: default;
+            color: #999;
+        }
+    }
+
+    &.link {
+        color: initial;
+        background: none;
+        border: none;
+        text-decoration: underline;
+    }
+
+    &.small {
+        font-size: 14px;
+        padding: 4px 8px;
+    }
+
+    &.block {
+        display: block;
+        padding: 8px;
+        width: 100%;
+    }
+}

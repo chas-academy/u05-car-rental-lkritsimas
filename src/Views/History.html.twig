@@ -1,8 +1,8 @@
 {% extends "Base.html.twig" %}
 {% set title = 'History' %}
 {% block content %}
-    <h2>History</h2>
-    <table>
+    <h2 class="headline">History</h2>
+    <table class="rounded">
         <thead>
             <tr>
                 <th>License plate</th>
@@ -27,9 +27,9 @@
         </tbody>
         <tfoot>
             <tr>
-                <td>Sum</td>
-                <td colspan="4"></td>
-                <td>{{ sum }}</td>
+                <th>Sum</th>
+                <th colspan="4"></th>
+                <th>{{ sum }}</th>
             </tr>
         </tfoot>
     </table>

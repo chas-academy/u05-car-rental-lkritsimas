@@ -1,45 +1,49 @@
 {% extends "Base.html.twig" %}
 {% set title = 'Customers' %}
 {% block content %}
-    <h2>Customers</h2>
-    <table>
-        <tr>
-            <th>Personal identity number</th>
-            <th>Firstname</th>
-            <th>Surname</th>
-            <th>Address</th>
-            <th>Postcode</th>
-            <th>City</th>
-            <th>Phone number</th>
-            <th>Registered at</th>
-            <th colspan="2"></th>
-        </tr>
-        {% for customer in customers %}
+    <h2 class="headline">Customers</h2>
+    <table class="rounded">
+        <thead>
             <tr>
-                <td>{{ customer.id }}</td>
-                <td>{{ customer.firstname }}</td>
-                <td>{{ customer.surname }}</td>
-                <td>{{ customer.address }}</td>
-                <td>{{ customer.postcode }}</td>
-                <td>{{ customer.city }}</td>
-                <td>{{ customer.phone }}</td>
-                <td>{{ customer.created_at }}</td>
-                {% if customer.booking_id is empty %}
-                    {% set isBooked = false %}
-                {% else %}
-                    {% set isBooked = true %}
-                {% endif %}
-                <td>
-                    <button type="button" data-id="{{ customer.id }}" data-target="editCustomer" {{ (isBooked) ? 'disabled' : '' }}>
-                        Edit
-                    </button>
-                </td>
-                <td>
-                    <button type="button" class="link" data-id="{{ customer.id }}" data-target="removeCustomer" {{ (isBooked) ? 'disabled' : '' }}>
-                        Remove
-                    </button>
-                </td>
+                <th>Personal identity number</th>
+                <th>Firstname</th>
+                <th>Surname</th>
+                <th>Address</th>
+                <th>Postcode</th>
+                <th>City</th>
+                <th>Phone number</th>
+                <th>Registered at</th>
+                <th colspan="2"></th>
             </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.firstname }}</td>
+                    <td>{{ customer.surname }}</td>
+                    <td>{{ customer.address }}</td>
+                    <td>{{ customer.postcode }}</td>
+                    <td>{{ customer.city }}</td>
+                    <td>{{ customer.phone }}</td>
+                    <td>{{ customer.created_at }}</td>
+                    {% if customer.booking_id is empty %}
+                        {% set isBooked = false %}
+                    {% else %}
+                        {% set isBooked = true %}
+                    {% endif %}
+                    <td>
+                        <button type="button" data-id="{{ customer.id }}" data-target="editCustomer" {{ (isBooked) ? 'disabled' : '' }}>
+                            Edit
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="link" data-id="{{ customer.id }}" data-target="removeCustomer" {{ (isBooked) ? 'disabled' : '' }}>
+                            Remove
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
 {% endblock %}

@@ -1,11 +1,16 @@
 {% block navbar %}
     <nav>
+        {% block navbarTitle %}
+            <h1>
+                <a href="/" class="logo">{{ siteTitle }}</a>
+            </h1>
+        {% endblock %}
         <ul>
             <li {{ (route == 'customers') ? 'class="selected"' : '' }}>
-                <a href="/customer">Customers</a>
+                <a href="/customers">Customers</a>
             </li>
             <li {{ (route == 'vehicles') ? 'class="selected"' : '' }}>
-                <a href="/vehicle">Vehicles</a>
+                <a href="/vehicles">Vehicles</a>
             </li>
             <li>
                 <a href="">Check out car</a>

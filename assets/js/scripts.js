@@ -27,7 +27,7 @@ document
                 }
             };
 
-            xhr.open("POST", `/vehicle/remove/${vehicleId}`, false);
+            xhr.open("POST", `/vehicles/remove/${vehicleId}`, false);
             xhr.setRequestHeader(
                 "Content-Type",
                 "application/x-www-form-urlencoded"

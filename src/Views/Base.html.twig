@@ -1,3 +1,5 @@
+{% set siteTitle = 'RentACar' %}
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,20 +11,20 @@
                     {{ title }}
                     -
                 {% endif %}
-                RentACar
+                {{ siteTitle }}
             </title>
         {% endblock %}
     </head>
     <body>
         <header>
-            <h1>RentACar</h1>
             {{ include("Navbar.html.twig") }}
         </header>
         <main>
+            {{ include("Breadcrumb.html.twig") }}
             {% block content %}{% endblock %}
         </main>
         <footer>
-            Todo: Add footer
+            <small>Lacki Kritsimas - 2020</small>
         </footer>
         <script src="/assets/js/scripts.js" type="module"></script>
     </body>

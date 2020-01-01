@@ -1,94 +1,217 @@
+header > nav {
+  padding: 0 16px;
+  background-color: #ffffff;
+}
+
+header > nav .logo {
+  color: inherit;
+  text-decoration: none;
+}
+
+header > nav h1 {
+  color: #000000;
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 16px;
+}
+
+header > nav ul {
+  display: inline-block;
+  list-style: none;
+}
+
+header > nav ul > li {
+  display: inline-block;
+}
+
+header > nav ul > li.selected {
+  background-color: #e8e8ed;
+}
+
+header > nav ul > li > a {
+  display: block;
+  text-decoration: none;
+  color: #000000;
+  padding: 16px;
+}
+
+.btn,
+button {
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  background-color: #247cff;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+
+.btn:disabled,
+button:disabled {
+  cursor: default;
+  color: #999;
+  background-color: #e6e6e6;
+}
+
+.btn:disabled.link,
+button:disabled.link {
+  cursor: default;
+  color: #999;
+}
+
+.btn.link,
+button.link {
+  color: initial;
+  background: none;
+  border: none;
+  text-decoration: underline;
+}
+
+.btn.small,
+button.small {
+  font-size: 14px;
+  padding: 4px 8px;
+}
+
+.btn.block,
+button.block {
+  display: block;
+  padding: 8px;
+  width: 100%;
+}
+
+table {
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+table th {
+  padding-right: 40px;
+  text-transform: uppercase;
+  font-size: 14px;
+  padding: 8px 40px 8px 8px;
+}
+
+table td {
+  padding: 8px;
+}
+
+table tfoot {
+  margin-top: 20px;
+}
+
+table.rounded {
+  border-spacing: 0 10px;
+  border-collapse: separate;
+}
+
+table.rounded thead td,
+table.rounded tbody td {
+  color: #606060;
+  padding: 8px;
+  line-height: 1.4;
+  background-color: #f1f1f1;
+  border: solid 1px transparent;
+  border-style: solid none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+table.rounded thead tr > td:first-child,
+table.rounded tbody tr > td:first-child {
+  border-left-style: solid;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+table.rounded thead tr > td:last-child,
+table.rounded tbody tr > td:last-child {
+  border-right-style: solid;
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+table.rounded thead th {
+  padding-right: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+table.rounded tbody tr {
+  overflow: hidden;
+}
+
+table.rounded tbody tr:hover td {
+  cursor: pointer;
+  background-color: #dfdfdf;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+}
+
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
-    font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
-    background-color: #f8f9fa;
-}
-
-header ul {
-    list-style: none;
-    background-color: #666;
-}
-
-header ul > li {
-    display: inline-block;
-    padding: 16px;
-}
-
-header ul > li.selected {
-    background-color: #444;
-}
-
-header ul > li > a {
-    color: #fff;
-    padding: 8px;
-    text-decoration: none;
-}
-
-header {
-    text-align: center;
+  background-color: #f8f9fa;
 }
 
 main {
-    text-align: center;
+  max-width: 1248px;
+  margin: 0 auto;
 }
 
 footer {
-    text-align: center;
+  text-align: center;
 }
 
-table {
-    margin: 0 auto;
-    background-color: #eee;
-    border: 1px solid #ccc;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
-table th {
-    background-color: #bbb;
-    padding: 8px;
-    border: none;
+.headline {
+  font-weight: 400;
+  font-size: 2em;
 }
 
-table td {
-    padding: 8px;
-    border: none;
+.float-left {
+  float: left;
 }
 
-table tr:nth-child(odd) {
-    background-color: #ddd;
+.float-right {
+  float: right;
 }
 
-button {
-    cursor: pointer;
-    color: #fff;
-    background-color: #247cff;
-    border: none;
-    border-radius: 4px;
-    padding: 6px 12px;
+.text-center {
+  text-align: center;
 }
 
-button[disabled] {
-    cursor: default;
-    color: #999;
-    background-color: #e6e6e6;
+.text-right {
+  text-align: right;
 }
-
-button.link {
-    color: initial;
-    background: none;
-    border: none;
-    text-decoration: underline;
-}
-
-button[disabled].link {
-    cursor: default;
-    color: #999;
-}
+/*# sourceMappingURL=main.css.map */
