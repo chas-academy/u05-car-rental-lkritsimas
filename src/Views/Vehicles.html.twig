@@ -1,55 +1,45 @@
-{% extends "Base.html.twig" %} {% set title = 'Vehicles' %} {% block content %}
-<h2>Vehicles</h2>
-<a href="/vehicle/new">New vehicle</a>
-<table>
-    <tr>
-        <th>License plate</th>
-        <th>Make</th>
-        <th>Color</th>
-        <th>Year</th>
-        <th>Price</th>
-        <th>Hired by</th>
-        <th>Hired date</th>
-        <th colspan="2"></th>
-    </tr>
-    {% for vehicle in vehicles %}
-    <tr>
-        <td>{{ vehicle.id }}</td>
-        <td>{{ vehicle.make }}</td>
-        <td>{{ vehicle.color }}</td>
-        <td>{{ vehicle.year }}</td>
-        <td>{{ vehicle.price }}</td>
-        {% if vehicle.customer_id is empty %}
-        {% set isBooked = false %}
-        <td colspan="2">Free</td>
-        {% else %}
-        {% set isBooked = true %}
-        <td>{{ vehicle.customer_id }}</td>
-        <td>{{ vehicle.created_at }}</td>
-        {% endif %}
-        <td>
-            <button
-                type="button"
-                data-id="{{ vehicle.id }}"
-                data-target="editVehicle"
-                {{ (isBooked) ? 'disabled' : '' }}
-            >
-                Edit
-            </button>
-        </td>
-        <td>
-            <button
-                type="button"
-                class="link"
-                data-id="{{ vehicle.id }}"
-                data-target="removeVehicle"
-                {{ (isBooked) ? 'disabled' : '' }}
-            >
-                Remove
-            </button>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
-
+{% extends "Base.html.twig" %}
+{% set title = 'Vehicles' %}
+{% block content %}
+    <h2>Vehicles</h2>
+    <a href="/vehicle/new">New vehicle</a>
+    <table>
+        <tr>
+            <th>License plate</th>
+            <th>Make</th>
+            <th>Color</th>
+            <th>Year</th>
+            <th>Price</th>
+            <th>Hired by</th>
+            <th>Hired date</th>
+            <th colspan="2"></th>
+        </tr>
+        {% for vehicle in vehicles %}
+            <tr>
+                <td>{{ vehicle.id }}</td>
+                <td>{{ vehicle.make }}</td>
+                <td>{{ vehicle.color }}</td>
+                <td>{{ vehicle.year }}</td>
+                <td>{{ vehicle.price }}</td>
+                {% if vehicle.customer_id is empty %}
+                    {% set isBooked = false %}
+                    <td colspan="2">Free</td>
+                {% else %}
+                    {% set isBooked = true %}
+                    <td>{{ vehicle.customer_id }}</td>
+                    <td>{{ vehicle.created_at }}</td>
+                {% endif %}
+                <td>
+                    <button type="button" data-id="{{ vehicle.id }}" data-target="editVehicle" {{ (isBooked) ? 'disabled' : '' }}>
+                        Edit
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="link" data-id="{{ vehicle.id }}" data-target="removeVehicle" {{ (isBooked) ? 'disabled' : '' }}>
+                        Remove
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

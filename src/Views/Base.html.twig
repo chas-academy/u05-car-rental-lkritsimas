@@ -2,14 +2,15 @@
 <html>
     <head>
         {% block head %}
-        <link
-            href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap"
-            rel="stylesheet"
-        />
-        <link rel="stylesheet" href="/assets/css/main.css" />
-        <title>
-            {% if title is defined %} {{ title }} - {% endif %} RentACar
-        </title>
+            <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet"/>
+            <link rel="stylesheet" href="/assets/css/main.css"/>
+            <title>
+                {% if title is defined %}
+                    {{ title }}
+                    -
+                {% endif %}
+                RentACar
+            </title>
         {% endblock %}
     </head>
     <body>

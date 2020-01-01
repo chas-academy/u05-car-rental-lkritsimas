@@ -1,71 +1,73 @@
-{% extends "Base.html.twig" %} {% set title = 'New vehicle' %} {% block content
-%}
-<h2>New vehicle</h2>
-<form method="POST" action="/vehicle/created">
-    <table>
-        <tr>
-            <th>License plate</th>
-            <td>
-                <input name="id" />
-            </td>
-        </tr>
-        <tr>
-            <th>Make</th>
-            <td>
-                <select name="make" placeholder="Select make">
-                    <option hidden disabled selected value>
-                        -- Select make --
-                    </option>
-                    {% for make in makes %}
-                    <option value="{{ make.id }}">{{ make.make }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th>Color</th>
-            <td>
-                <select name="color" placeholder="Select color">
-                    <option hidden disabled selected value>
-                        -- Select color --
-                    </option>
-                    {% for color in colors %}
-                    <option value="{{ color.id }}">{{ color.color }}</option>
-                    {% endfor %}
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <th>Year</th>
-            <td>
-                <input name="year" />
-            </td>
-        </tr>
-        <tr>
-            <th>Price</th>
-            <td>
-                <input name="price" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button type="submit">Create</button>
-            </td>
-        </tr>
-    </table>
-</form>
-{% block responseMessage %}
-<div id="response-message">
-    {% if success %}
-    <div class="success">
-        <h2>Success!</h2>
-        <p>{{ responseMessage }}</p>
-    </div>
-    {% else %}
-    <div class="error">
-        <h2>Error!</h2>
-        <p>{{ responseMessage }}</p>
-    </div>
-    {% endif %}
-</div>
-{% endblock %} {% endblock %}
+{% extends "Base.html.twig" %}
+{% set title = 'New vehicle' %}
+{% block content %}
+    <h2>New vehicle</h2>
+    <form method="POST" action="/vehicle/created">
+        <table>
+            <tr>
+                <th>License plate</th>
+                <td>
+                    <input name="id"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Make</th>
+                <td>
+                    <select name="make" placeholder="Select make">
+                        <option hidden disabled selected value>
+                            -- Select make --
+                        </option>
+                        {% for make in makes %}
+                            <option value="{{ make.id }}">{{ make.make }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>
+                    <select name="color" placeholder="Select color">
+                        <option hidden disabled selected value>
+                            -- Select color --
+                        </option>
+                        {% for color in colors %}
+                            <option value="{{ color.id }}">{{ color.color }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>
+                    <input name="year"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>
+                    <input name="price"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Create</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    {% block responseMessage %}
+        <div id="response-message">
+            {% if success %}
+                <div class="success">
+                    <h2>Success!</h2>
+                    <p>{{ responseMessage }}</p>
+                </div>
+            {% else %}
+                <div class="error">
+                    <h2>Error!</h2>
+                    <p>{{ responseMessage }}</p>
+                </div>
+            {% endif %}
+        </div>
+    {% endblock %}
+{% endblock %}
