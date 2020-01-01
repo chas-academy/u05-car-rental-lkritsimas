@@ -1,38 +1,43 @@
 <?php
+
 namespace CarRental\Controllers;
 
 use CarRental\Models\VehicleModel;
 use CarRental\Models\BookingModel;
 
-class VehicleController extends AbstractController {
-  public function get() {
+class VehicleController extends AbstractController
+{
+  public function get()
+  {
     $vehicleModel = new vehicleModel($this->db);
     $vehicles = $vehicleModel->getVehicles();
 
     return $this->render("Vehicles.html.twig", [
-        "route" => "vehicles", 
-        "vehicles" => $vehicles
+      "route" => "vehicles",
+      "vehicles" => $vehicles
     ]);
   }
 
-  public function newVehicle() {
+  public function newVehicle()
+  {
     $vehicleModel = new vehicleModel($this->db);
     $makes = $vehicleModel->getMakes();
     $colors = $vehicleModel->getColors();
 
     return $this->render("NewVehicle.html.twig", [
-        "route" => "vehicles",
-        "makes" => $makes,
-        "colors" => $colors
+      "route" => "vehicles",
+      "makes" => $makes,
+      "colors" => $colors
     ]);
-  } 
+  }
 
-  public function add() {
+  public function add()
+  {
     $data = $this->request->getData();
 
     $vehicleModel = new VehicleModel($this->db);
     $makes = $vehicleModel->getMakes();
-    $colors = $vehicleModel->getColors();    
+    $colors = $vehicleModel->getColors();
     $vehicleId = $vehicleModel->addVehicle($data["id"], $data["make"], $data["color"], $data["year"], $data["price"]);
     $vehicle = [
       "id" => $vehicleId,
@@ -43,7 +48,7 @@ class VehicleController extends AbstractController {
     ];
 
     return $this->render("NewVehicle.html.twig", [
-      "route" => "vehicles", 
+      "route" => "vehicles",
       "makes" => $makes,
       "colors" => $colors,
       "success" => $vehicleId ? true : false,
@@ -52,7 +57,8 @@ class VehicleController extends AbstractController {
     ]);
   }
 
-  public function remove() {
+  public function remove()
+  {
     $data = $this->request->getData();
 
     $vehicleModel = new VehicleModel($this->db);

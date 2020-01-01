@@ -1,11 +1,14 @@
 <?php
+
 namespace CarRental\Models;
 
 use \PDO;
 use CarRental\Exceptions\DatabaseException;
 
-class BookingModel extends AbstractModel {
-  public function getBookings() {
+class BookingModel extends AbstractModel
+{
+  public function getBookings()
+  {
     $result = [];
     $query = "SELECT * FROM booking 
                 JOIN customers ON customers.id = customer_id 
@@ -23,7 +26,7 @@ class BookingModel extends AbstractModel {
 
       // Throw exception if query fails
       if (!$result) throw new DatabaseException($this->db->errorInfo());
-    } catch(DatabaseException $e) {
+    } catch (DatabaseException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
         "message" => $e->getMessage()

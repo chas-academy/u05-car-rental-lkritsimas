@@ -1,17 +1,20 @@
 <?php
+
 namespace CarRental\Controllers;
 
 use CarRental\Core\Request;
 use CarRental\Utils\DependencyInjector;
 
-abstract class AbstractController {
+abstract class AbstractController
+{
     protected $view;
     protected $di;
     protected $request;
     protected $db;
     protected $config;
 
-    public function __construct(DependencyInjector $di, Request $request) {
+    public function __construct(DependencyInjector $di, Request $request)
+    {
         $this->request = $request;
         $this->di = $di;
         $this->db = $di->get("PDO");
@@ -19,7 +22,8 @@ abstract class AbstractController {
         $this->config = $di->get('Utils\Config');
     }
 
-    protected function render(string $template, array $params): string {
+    protected function render(string $template, array $params): string
+    {
         return $this->view->render($template, $params);
     }
 }

@@ -1,12 +1,15 @@
 <?php
+
 namespace CarRental\Core;
 
-class Request {
+class Request
+{
     private $path;
     private $method;
     private $data;
 
-    public function __construct() {
+    public function __construct()
+    {
         // $pathArray = explode(
         //     "?", 
         //     filter_var($_SERVER["REQUEST_URI"], FILTER_SANITIZE_URL)
@@ -17,15 +20,18 @@ class Request {
         $this->data = array_merge($_POST, $_GET);
     }
 
-    public function getPath() {
+    public function getPath()
+    {
         return $this->path;
     }
 
-    public function getMethod() {
+    public function getMethod()
+    {
         return $this->method;
     }
 
-    public function getData() {
+    public function getData()
+    {
         return $this->data;
     }
 }

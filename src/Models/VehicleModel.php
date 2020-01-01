@@ -1,11 +1,14 @@
 <?php
+
 namespace CarRental\Models;
 
 use \PDO;
 use CarRental\Exceptions\DatabaseException;
 
-class VehicleModel extends AbstractModel {
-  public function getVehicles() {
+class VehicleModel extends AbstractModel
+{
+  public function getVehicles()
+  {
     $result = [];
     $query = "SELECT 
                 vehicles.*,
@@ -30,7 +33,7 @@ class VehicleModel extends AbstractModel {
 
       // Throw exception if query fails
       if (!$result) throw new DatabaseException($this->db->errorInfo());
-    } catch(DatabaseException $e) {
+    } catch (DatabaseException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
         "message" => $e->getMessage()
@@ -40,7 +43,8 @@ class VehicleModel extends AbstractModel {
     return $result;
   }
 
-  public function getColors() {
+  public function getColors()
+  {
     $result = [];
     $query = "SELECT * FROM colors";
 
@@ -53,7 +57,7 @@ class VehicleModel extends AbstractModel {
 
       // Throw exception if query fails
       if (!$result) throw new DatabaseException($this->db->errorInfo());
-    } catch(DatabaseException $e) {
+    } catch (DatabaseException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
         "message" => $e->getMessage()
@@ -61,9 +65,10 @@ class VehicleModel extends AbstractModel {
     }
 
     return $result;
-  }  
+  }
 
-  public function getMakes() {
+  public function getMakes()
+  {
     $result = [];
     $query = "SELECT * FROM makes";
 
@@ -76,40 +81,7 @@ class VehicleModel extends AbstractModel {
 
       // Throw exception if query fails
       if (!$result) throw new DatabaseException($this->db->errorInfo());
-    } catch(DatabaseException $e) {
-      $this->di->get("Twig_Environment")->render("Error.html.twig", [
-        "code" => $e->getCode(),
-        "message" => $e->getMessage()
-      ]);
-    }
-
-    return $result;
-  }  
-
-  public function addVehicle($id, $make, $color, $year, $price) {
-    $result = [];
-    $query = "INSERT INTO vehicles (`id`, `make`, `color`, `year`, `price`, `created_at`) 
-              VALUES (:id, :make, :color, :year, :price, NOW())";
-
-    try {
-      // Perform query
-      $statement = $this->db->prepare($query);
-
-      $statement->execute([
-        ":id" => strtoupper($id), 
-        ":make" => $make, 
-        ":color" => $color, 
-        ":year" => $year, 
-        ":price" => $price 
-      ]);
-
-      $result = $this->db->lastInsertId('id');
-      
-      var_dump($this->db->lastInsertId('id'));
-      var_dump($this->db->errorInfo());
-      // Throw exception if query fails
-      // if (!$result) throw new DatabaseException($this->db->errorInfo());
-    } catch(PDOException $e) {
+    } catch (DatabaseException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
         "message" => $e->getMessage()
@@ -119,7 +91,42 @@ class VehicleModel extends AbstractModel {
     return $result;
   }
 
-  public function removeVehicle($id) {
+  public function addVehicle($id, $make, $color, $year, $price)
+  {
+    $result = [];
+    $query = "INSERT INTO vehicles (`id`, `make`, `color`, `year`, `price`, `created_at`) 
+              VALUES (:id, :make, :color, :year, :price, NOW())";
+
+    try {
+      // Perform query
+      $statement = $this->db->prepare($query);
+
+      $statement->execute([
+        ":id" => strtoupper($id),
+        ":make" => $make,
+        ":color" => $color,
+        ":year" => $year,
+        ":price" => $price
+      ]);
+
+      $result = $this->db->lastInsertId('id');
+
+      var_dump($this->db->lastInsertId('id'));
+      var_dump($this->db->errorInfo());
+      // Throw exception if query fails
+      // if (!$result) throw new DatabaseException($this->db->errorInfo());
+    } catch (\PDOException $e) {
+      $this->di->get("Twig_Environment")->render("Error.html.twig", [
+        "code" => $e->getCode(),
+        "message" => $e->getMessage()
+      ]);
+    }
+
+    return $result;
+  }
+
+  public function removeVehicle($id)
+  {
     $result = [];
     $query = "DELETE FROM vehicles WHERE id = :id";
 
@@ -132,7 +139,7 @@ class VehicleModel extends AbstractModel {
 
       // Throw exception if query fails
       // if (!$result) throw new DatabaseException($this->db->errorInfo());
-    } catch(PDOException $e) {
+    } catch (\PDOException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
         "message" => $e->getMessage()
