@@ -2,7 +2,7 @@
 {% set title = 'Customers' %}
 {% block content %}
     <h2 class="headline">Customers</h2>
-    <table class="rounded">
+    <table id="customers" class="rounded">
         <thead>
             <tr>
                 <th>Personal identity number</th>
@@ -33,12 +33,12 @@
                         {% set isBooked = true %}
                     {% endif %}
                     <td>
-                        <button type="button" data-id="{{ customer.id }}" data-target="editCustomer" {{ (isBooked) ? 'disabled' : '' }}>
+                        <button type="button" class="hide" data-id="{{ customer.id }}" data-target="editCustomer" {{ (isBooked) ? 'disabled' : '' }}>
                             Edit
                         </button>
                     </td>
                     <td>
-                        <button type="button" class="link" data-id="{{ customer.id }}" data-target="removeCustomer" {{ (isBooked) ? 'disabled' : '' }}>
+                        <button type="button" class="hide" class="link" data-id="{{ customer.id }}" data-target="removeCustomer" {{ (isBooked) ? 'disabled' : '' }}>
                             Remove
                         </button>
                     </td>

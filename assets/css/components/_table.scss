@@ -64,7 +64,8 @@ table.rounded {
             overflow: hidden;
         }
 
-        tr:hover td {
+        tr:hover td,
+        tr.selected td {
             cursor: pointer;
             background-color: #dfdfdf;
         }

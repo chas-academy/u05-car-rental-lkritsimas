@@ -4,7 +4,7 @@
     <h2 class="headline">Vehicles</h2>
     <a href="/vehicles/new" class="btn small float-right">＋ New vehicle</a>
 
-    <table class="rounded">
+    <table id="vehicles" class="rounded">
         <thead>
             <tr>
                 <th>License plate</th>
@@ -34,12 +34,12 @@
                         <td>{{ vehicle.created_at }}</td>
                     {% endif %}
                     <td>
-                        <button type="button" data-id="{{ vehicle.id }}" data-target="editVehicle" {{ (isBooked) ? 'disabled' : '' }}>
+                        <button type="button" class="hide" data-id="{{ vehicle.id }}" data-target="editVehicle" {{ (isBooked) ? 'disabled' : '' }}>
                             Edit
                         </button>
                     </td>
                     <td>
-                        <button type="button" class="link" data-id="{{ vehicle.id }}" data-target="removeVehicle" {{ (isBooked) ? 'disabled' : '' }}>
+                        <button type="button" class="link hide" data-id="{{ vehicle.id }}" data-target="removeVehicle" {{ (isBooked) ? 'disabled' : '' }}>
                             Remove
                         </button>
                     </td>

@@ -1,8 +1,34 @@
+// Toggle action buttons on table row click
+document.querySelectorAll("table#customers tr").forEach(function(rowEl) {
+    rowEl.addEventListener("click", function(e) {
+        rowEl.classList.toggle("selected");
+        this.querySelectorAll("button[data-target]").forEach(function(
+            buttonEl
+        ) {
+            buttonEl.classList.toggle("hide");
+        });
+    });
+});
+
+// Toggle action buttons on table row click
+document.querySelectorAll("table#vehicles tr").forEach(function(rowEl) {
+    rowEl.addEventListener("click", function(e) {
+        rowEl.classList.toggle("selected");
+        this.querySelectorAll("button[data-target]").forEach(function(
+            buttonEl
+        ) {
+            buttonEl.classList.toggle("hide");
+        });
+    });
+});
+
 // Remove vehicle
 document
     .querySelectorAll('[data-target="removeVehicle"]')
     .forEach(function(buttonEl) {
-        buttonEl.addEventListener("click", function() {
+        buttonEl.addEventListener("click", function(e) {
+            e.stopPropagation();
+
             // Table row for corresponding vehicle ID
             let row = event.target.parentNode.parentNode;
             let vehicleId = this.dataset.id;
@@ -13,9 +39,7 @@ document
 
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
-                if (xhr.status !== 200) {
-                    alert("Error: Something went wrong!");
-                } else {
+                if (xhr.status === 200) {
                     // Check if request was successful
                     let parsedResponse = JSON.parse(xhr.response);
 
@@ -41,8 +65,10 @@ document
 document
     .querySelectorAll('[data-target="removeCustomer"]')
     .forEach(function(buttonEl) {
-        buttonEl.addEventListener("click", function() {
-            // Table row for corresponding vehicle ID
+        buttonEl.addEventListener("click", function(e) {
+            e.stopPropagation();
+
+            // Table row for corresponding customer ID
             let row = event.target.parentNode.parentNode;
             let customerId = this.dataset.id;
             let removeCustomer = confirm(
@@ -52,9 +78,7 @@ document
 
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
-                if (xhr.status !== 200) {
-                    alert("Error: Something went wrong!");
-                } else {
+                if (xhr.status === 200) {
                     // Check if request was successful
                     let parsedResponse = JSON.parse(xhr.response);
 
