@@ -2,6 +2,7 @@
 
 namespace CarRental\Controllers;
 
+use CarRental\Exceptions\HTTPException;
 use CarRental\Models\VehicleModel;
 use CarRental\Models\BookingModel;
 
@@ -34,6 +35,7 @@ class VehicleController extends AbstractController
   public function add()
   {
     $data = $this->request->getData();
+    if (empty($data)) throw new HTTPException("No POST data was provided", 500);
 
     $vehicleModel = new VehicleModel($this->db);
     $makes = $vehicleModel->getMakes();

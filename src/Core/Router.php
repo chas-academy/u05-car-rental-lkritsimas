@@ -47,6 +47,7 @@ class Router
             // Route does not exist, throw 404
             throw new HTTPException("Page not found", 404);
         } catch (HTTPException $e) {
+            // Render error page
             return $this->di->get("Twig_Environment")->render("Error.html.twig", [
                 "code" => $e->getCode(),
                 "message" => $e->getMessage()

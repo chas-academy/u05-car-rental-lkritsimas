@@ -101,7 +101,7 @@ class VehicleModel extends AbstractModel
       // Perform query
       $statement = $this->db->prepare($query);
 
-      $statement->execute([
+      $result = $statement->execute([
         ":id" => strtoupper($id),
         ":make" => $make,
         ":color" => $color,
@@ -109,10 +109,6 @@ class VehicleModel extends AbstractModel
         ":price" => $price
       ]);
 
-      $result = $this->db->lastInsertId('id');
-
-      var_dump($this->db->lastInsertId('id'));
-      var_dump($this->db->errorInfo());
       // Throw exception if query fails
       // if (!$result) throw new DatabaseException($this->db->errorInfo());
     } catch (\PDOException $e) {
