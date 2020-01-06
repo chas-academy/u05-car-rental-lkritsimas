@@ -1,0 +1,75 @@
+{% extends "Base.html.twig" %}
+{% set title = 'New customer' %}
+{% block content %}
+    <h2>New customer</h2>
+    <form method="POST" action="/customers/created">
+        <table>
+            <tr>
+                <th>Personal identity number</th>
+                <td>
+                    <input name="id" placeholder="YYMMDDXXXX" maxlength="10"/>
+
+                </td>
+            </tr>
+            <tr>
+                <th>First name</th>
+                <td>
+                    <input name="firstname"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Surname</th>
+                <td>
+                    <input name="surname"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>
+                    <input name="address"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Post code</th>
+                <td>
+                    <input name="postcode" maxlength="5"/>
+                </td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>
+                    <input name="city"/>
+                </td>
+            </tr>
+            <tr>
+                <th>Phone number</th>
+                <td>
+                    <input name="phone" maxlength="10"/>
+
+                </td>
+            </tr>
+            <tfoot>
+                <tr colspan="2">
+                    <td colspan="2">
+                        <button type="submit" class="block">Create</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </form>
+    {% block responseMessage %}
+        <div id="response-message">
+            {% if success == true %}
+                <div class="alert success">
+                    <h2>Success</h2>
+                    <p>{{ responseMessage }}</p>
+                </div>
+            {% elseif success is same as(false) %}
+                <div class="alert error">
+                    <h2>Error</h2>
+                    <p>{{ responseMessage }}</p>
+                </div>
+            {% endif %}
+        </div>
+    {% endblock %}
+{% endblock %}

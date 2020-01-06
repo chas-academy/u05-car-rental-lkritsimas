@@ -1,2 +1,27 @@
 .alert {
+    color: #ffffff;
+    border-radius: 4px;
+    padding: 8px;
+
+    h2 {
+        font-size: 14px;
+        // font-weight: 400;
+        // text-transform: uppercase;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    &.success {
+        color: #248f24;
+        background-color: #d1f2cf;
+        border: 1px solid #248f24;
+    }
+
+    &.error {
+        color: #8f2424;
+        background-color: #f6cbcb;
+        border: 1px solid #ebadad;
+    }
 }

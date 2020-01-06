@@ -60,13 +60,13 @@
     {% block responseMessage %}
         <div id="response-message">
             {% if success %}
-                <div class="success">
-                    <h2>Success!</h2>
+                <div class="alert success">
+                    <h2>Success</h2>
                     <p>{{ responseMessage }}</p>
                 </div>
-            {% else %}
-                <div class="error">
-                    <h2>Error!</h2>
+            {% elseif success is same as(false) %}
+                <div class="alert error">
+                    <h2>Error</h2>
                     <p>{{ responseMessage }}</p>
                 </div>
             {% endif %}

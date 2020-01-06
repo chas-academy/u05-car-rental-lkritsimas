@@ -49,6 +49,38 @@ class CustomerModel extends AbstractModel
     return $result;
   }
 
+  public function addCustomer($id, $firstname, $surname, $address, $postcode, $city, $phoneNumber)
+  {
+    $result = [];
+    $query = "INSERT INTO customers (`id`, `firstname`, `surname`, `address`, `postcode`, `city`, `phone`, `created_at`) 
+              VALUES (:id, :firstname, :surname, :address, :postcode, :city, :phone, NOW())";
+
+    try {
+      // Perform query
+      $statement = $this->db->prepare($query);
+
+      $result = $statement->execute([
+        ":id" => $id,
+        ":firstname" => $firstname,
+        ":surname" => $surname,
+        ":address" => $address,
+        ":postcode" => $postcode,
+        ":city" => $city,
+        ":phone" => $phoneNumber
+      ]);
+
+      // Throw exception if query fails
+      // if (!$result) throw new DatabaseException($this->db->errorInfo());
+    } catch (\PDOException $e) {
+      $this->di->get("Twig_Environment")->render("Error.html.twig", [
+        "code" => $e->getCode(),
+        "message" => $e->getMessage()
+      ]);
+    }
+
+    return $result;
+  }
+
   public function removeCustomer($id)
   {
     $result = [];

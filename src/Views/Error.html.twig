@@ -1,8 +1,8 @@
 {% extends "Base.html.twig" %}
 {% set title = "Error #{code}" %}
 {% block content %}
-    <div class="alert alert--error">
+    <div class="jumbo text-center">
         <h2>{{ code }}</h2>
-        <h3>{{ message }}</h3>
+        <p>{{ message }}</p>
     </div>
 {% endblock %}

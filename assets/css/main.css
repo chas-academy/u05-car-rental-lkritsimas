@@ -1,3 +1,9 @@
+header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
 header > nav {
   padding: 0 16px;
   background-color: #ffffff;
@@ -150,6 +156,32 @@ table.rounded tbody tr.selected td {
   background-color: #dfdfdf;
 }
 
+.alert {
+  color: #ffffff;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.alert h2 {
+  font-size: 14px;
+}
+
+.alert p {
+  font-size: 14px;
+}
+
+.alert.success {
+  color: #248f24;
+  background-color: #d1f2cf;
+  border: 1px solid #248f24;
+}
+
+.alert.error {
+  color: #8f2424;
+  background-color: #f6cbcb;
+  border: 1px solid #ebadad;
+}
+
 input,
 select {
   width: 100%;
@@ -158,6 +190,20 @@ select {
   border: 1px solid transparent;
   -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
           box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+}
+
+.jumbo {
+  padding: 32px;
+}
+
+.jumbo h2 {
+  color: #272727;
+  font-size: 6em;
+}
+
+.jumbo p {
+  color: #444444;
+  font-size: 2em;
 }
 
 * {
@@ -191,6 +237,7 @@ h3,
 h4,
 h5,
 h6 {
+  letter-spacing: 0.65px;
   margin-top: 8px;
   margin-bottom: 8px;
 }

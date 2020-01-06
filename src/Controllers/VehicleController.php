@@ -8,9 +8,23 @@ use CarRental\Models\BookingModel;
 
 class VehicleController extends AbstractController
 {
+  public function newVehicle()
+  {
+    $vehicleModel = new VehicleModel($this->db);
+    $makes = $vehicleModel->getMakes();
+    $colors = $vehicleModel->getColors();
+
+    return $this->render("NewVehicle.html.twig", [
+      "route" => "vehicles",
+      "makes" => $makes,
+      "colors" => $colors,
+      "success" => null
+    ]);
+  }
+
   public function get()
   {
-    $vehicleModel = new vehicleModel($this->db);
+    $vehicleModel = new VehicleModel($this->db);
     $vehicles = $vehicleModel->getVehicles();
 
     return $this->render("Vehicles.html.twig", [
@@ -19,23 +33,12 @@ class VehicleController extends AbstractController
     ]);
   }
 
-  public function newVehicle()
-  {
-    $vehicleModel = new vehicleModel($this->db);
-    $makes = $vehicleModel->getMakes();
-    $colors = $vehicleModel->getColors();
-
-    return $this->render("NewVehicle.html.twig", [
-      "route" => "vehicles",
-      "makes" => $makes,
-      "colors" => $colors
-    ]);
-  }
-
   public function add()
   {
     $data = $this->request->getData();
     if (empty($data)) throw new HTTPException("No POST data was provided", 500);
+    else if (empty($data["make"])) throw new HTTPException("No make was provided", 500);
+    else if (empty($data["color"])) throw new HTTPException("No color was provided", 500);
 
     $vehicleModel = new VehicleModel($this->db);
     $makes = $vehicleModel->getMakes();
@@ -54,7 +57,7 @@ class VehicleController extends AbstractController
       "makes" => $makes,
       "colors" => $colors,
       "success" => $vehicleId ? true : false,
-      "responseMessage" => $vehicleId,
+      "responseMessage" => $vehicleId ? "Successfully created vehicle $vehicleId" : "Could not create vehicle $vehicleId",
       "vehicleData" => $vehicle
     ]);
   }

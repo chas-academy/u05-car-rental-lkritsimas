@@ -23,9 +23,25 @@
         "controller": "CustomerController",
         "method": "get"
     },
+    "customers/new": {
+        "controller": "CustomerController",
+        "method": "newCustomer"
+    },
+    "customers/created": {
+        "controller": "CustomerController",
+        "method": "add"
+    },
     "customers/remove/{id}": {
         "controller": "CustomerController",
         "method": "remove"
+    },
+    "rent": {
+        "controller": "CustomerController",
+        "method": "get"
+    },
+    "return": {
+        "controller": "CustomerController",
+        "method": "get"
     },
     "": {
         "controller": "IndexController",
