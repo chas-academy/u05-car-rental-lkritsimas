@@ -1,56 +1,56 @@
 {% extends "Base.html.twig" %}
-{% set title = 'New customer' %}
+{% set title = 'Edit customer' %}
 {% block content %}
-    <h2>New customer</h2>
-    <form id="customer" method="POST" action="/customers/created">
+    <h2>Edit customer</h2>
+    <form id="customer" method="POST" action="/customers/edit/{{ customer.id }}">
+        <input type="hidden" name="id" value="{{ customer.id }}"/>
         <table>
             <tr>
                 <th>Personal identity number</th>
                 <td>
-                    <input name="id" placeholder="YYMMDDXXXX" maxlength="10"/>
+                    <input placeholder="YYMMDDXXXX" maxlength="10" disabled value="{{ customer.id }}"/>
                 </td>
             </tr>
             <tr>
                 <th>First name</th>
                 <td>
-                    <input name="firstname"/>
+                    <input name="firstname" value="{{ customer.firstname }}"/>
                 </td>
             </tr>
             <tr>
                 <th>Surname</th>
                 <td>
-                    <input name="surname"/>
+                    <input name="surname" value="{{ customer.surname }}"/>
                 </td>
             </tr>
             <tr>
                 <th>Address</th>
                 <td>
-                    <input name="address"/>
+                    <input name="address" value="{{ customer.address }}"/>
                 </td>
             </tr>
             <tr>
                 <th>Post code</th>
                 <td>
-                    <input name="postcode" maxlength="5"/>
+                    <input name="postcode" maxlength="5" value="{{ customer.postcode }}"/>
                 </td>
             </tr>
             <tr>
                 <th>City</th>
                 <td>
-                    <input name="city"/>
+                    <input name="city" value="{{ customer.city }}"/>
                 </td>
             </tr>
             <tr>
                 <th>Phone number</th>
                 <td>
-                    <input name="phone" maxlength="10"/>
-
+                    <input name="phone" maxlength="10" value="{{ customer.phone }}"/>
                 </td>
             </tr>
             <tfoot>
                 <tr colspan="2">
                     <td colspan="2">
-                        <button type="submit" class="block">Create</button>
+                        <button type="submit" class="block">Update</button>
                     </td>
                 </tr>
             </tfoot>

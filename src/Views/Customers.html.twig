@@ -29,18 +29,19 @@
                     <td>{{ customer.city }}</td>
                     <td>{{ customer.phone }}</td>
                     <td>{{ customer.created_at }}</td>
-                    {% if customer.booking_id is empty %}
+                    {% if customer.editable == false %}
                         {% set isBooked = false %}
                     {% else %}
                         {% set isBooked = true %}
                     {% endif %}
                     <td>
-                        <button type="button" class="hide" data-id="{{ customer.id }}" data-target="editCustomer" {{ (isBooked) ? 'disabled' : '' }}>
+                        {# <button type="button" class="hide" data-id="{{ customer.id }}" data-target="editCustomer" {{ (isBooked) ? 'disabled' : '' }}> #}
+                        <a href="customers/edit/{{ customer.id }}" class="btn small {{ (isBooked) ? 'disabled' : '' }}">
                             Edit
-                        </button>
+                        </a>
                     </td>
                     <td>
-                        <button type="button" class="hide" class="link" data-id="{{ customer.id }}" data-target="removeCustomer" {{ (isBooked) ? 'disabled' : '' }}>
+                        <button type="button" class="link" data-id="{{ customer.id }}" data-target="removeCustomer" {{ (isBooked) ? 'disabled' : '' }}>
                             Remove
                         </button>
                     </td>

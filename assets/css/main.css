@@ -53,14 +53,17 @@ button {
   padding: 6px 12px;
 }
 
-.btn:disabled,
+.btn.disabled, .btn:disabled,
+button.disabled,
 button:disabled {
   cursor: default;
   color: #999;
   background-color: #e6e6e6;
+  pointer-events: none;
 }
 
-.btn:disabled.link,
+.btn.disabled.link, .btn:disabled.link,
+button.disabled.link,
 button:disabled.link {
   cursor: default;
   color: #999;

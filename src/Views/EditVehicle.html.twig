@@ -1,24 +1,22 @@
 {% extends "Base.html.twig" %}
-{% set title = 'New vehicle' %}
+{% set title = 'Edit vehicle' %}
 {% block content %}
-    <h2>New vehicle</h2>
-    <form id="vehicle" method="POST" action="/vehicles/created">
+    <h2>Edit vehicle</h2>
+    <form id="vehicle" method="POST" action="/vehicles/edit/{{ vehicle.id }}">
+        <input type="hidden" name="id" value="{{ vehicle.id }}"/>
         <table>
             <tr>
                 <th>License plate</th>
                 <td>
-                    <input name="id" placeholder="AAANNX" maxlength="6"/>
+                    <input placeholder="AAANNX" maxlength="6" value="{{ vehicle.id }}" disabled/>
                 </td>
             </tr>
             <tr>
                 <th>Make</th>
                 <td>
                     <select name="make" placeholder="Select make">
-                        <option hidden disabled selected value>
-                            -- Select make --
-                        </option>
                         {% for make in makes %}
-                            <option value="{{ make.id }}">{{ make.make }}</option>
+                            <option {{ vehicle.make == make.make ? "selected" : "" }} value="{{ make.id }}">{{ make.make }}</option>
                         {% endfor %}
                     </select>
                 </td>
@@ -27,11 +25,8 @@
                 <th>Color</th>
                 <td>
                     <select name="color" placeholder="Select color">
-                        <option hidden disabled selected value>
-                            -- Select color --
-                        </option>
                         {% for color in colors %}
-                            <option value="{{ color.id }}">{{ color.color }}</option>
+                            <option {{ vehicle.color == color.color ? "selected" : "" }} value="{{ color.id }}">{{ color.color }}</option>
                         {% endfor %}
                     </select>
                 </td>
@@ -39,13 +34,13 @@
             <tr>
                 <th>Year</th>
                 <td>
-                    <input name="year" placeholder="YYYY" maxlength="4"/>
+                    <input name="year" placeholder="YYYY" maxlength="4" value="{{ vehicle.year }}"/>
                 </td>
             </tr>
             <tr>
                 <th>Price</th>
                 <td>
-                    <input name="price" placeholder="0.00"/>
+                    <input name="price" placeholder="0.00" value="{{ vehicle.price }}"/>
                 </td>
             </tr>
             <tfoot>

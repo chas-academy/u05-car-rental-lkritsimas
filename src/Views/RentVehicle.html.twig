@@ -1,51 +1,43 @@
 {% extends "Base.html.twig" %}
-{% set title = 'New vehicle' %}
+{% set title = 'Rent vehicle' %}
 {% block content %}
-    <h2>New vehicle</h2>
-    <form id="vehicle" method="POST" action="/vehicles/created">
+    <h2 class="headline">Rent vehicle</h2>
+    <form method="POST" action="/rent/new">
         <table>
             <tr>
-                <th>License plate</th>
+                <th>Customer</th>
                 <td>
-                    <input name="id" placeholder="AAANNX" maxlength="6"/>
-                </td>
-            </tr>
-            <tr>
-                <th>Make</th>
-                <td>
-                    <select name="make" placeholder="Select make">
+                    <select name="customerId">
                         <option hidden disabled selected value>
-                            -- Select make --
+                            -- Select customer --
                         </option>
-                        {% for make in makes %}
-                            <option value="{{ make.id }}">{{ make.make }}</option>
+                        {% for customer in customers %}
+                            <option value="{{ customer.id }}">
+                                {{ customer.id }}
+                                {{ customer.firstname }}
+                                {{ customer.surname }}
+                            </option>
                         {% endfor %}
                     </select>
                 </td>
             </tr>
             <tr>
-                <th>Color</th>
+                <th>Vehicle</th>
                 <td>
-                    <select name="color" placeholder="Select color">
+                    <select name="vehicleId">
                         <option hidden disabled selected value>
-                            -- Select color --
+                            -- Select vehicle --
                         </option>
-                        {% for color in colors %}
-                            <option value="{{ color.id }}">{{ color.color }}</option>
+                        {% for vehicle in vehicles %}
+                            <option value="{{ vehicle.id }}">
+                                {{ vehicle.id }}
+                                –
+                                {{ vehicle.make }}
+                                ({{ vehicle.color }})
+                                {{ vehicle.price }}/day
+                            </option>
                         {% endfor %}
                     </select>
-                </td>
-            </tr>
-            <tr>
-                <th>Year</th>
-                <td>
-                    <input name="year" placeholder="YYYY" maxlength="4"/>
-                </td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>
-                    <input name="price" placeholder="0.00"/>
                 </td>
             </tr>
             <tfoot>

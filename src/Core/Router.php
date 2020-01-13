@@ -8,7 +8,6 @@ use CarRental\Utils\DependencyInjector;
 
 class Router
 {
-
     private $di;
     private $routes;
 
@@ -22,7 +21,6 @@ class Router
     public function route(Request $request)
     {
         $path = $request->getPath();
-        $method = $request->getMethod();
 
         try {
             if (array_key_exists($path, $this->routes)) {
@@ -32,7 +30,6 @@ class Router
                 foreach ($this->routes as $route => $data) {
                     // $pattern = preg_replace("#\(/\)#", "/?", $route);
                     $pattern = "@^" . preg_replace("/{([a-zA-Z0-9\_\-]+)}/", "(?<$1>[a-zA-Z0-9\_\-]+)", $route) . "$@D";
-
                     preg_match($pattern, $path, $matches);
                     // Remove full match
                     array_shift($matches);

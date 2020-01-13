@@ -1,26 +1,159 @@
-// Toggle action buttons on table row click
-document.querySelectorAll("table#customers tr").forEach(function(rowEl) {
-    rowEl.addEventListener("click", function(e) {
-        rowEl.classList.toggle("selected");
-        this.querySelectorAll("button[data-target]").forEach(function(
-            buttonEl
-        ) {
-            buttonEl.classList.toggle("hide");
-        });
-    });
-});
+// // Toggle action buttons on table row click
+// document.querySelectorAll("table#customers tr").forEach(function(rowEl) {
+//     rowEl.addEventListener("click", function(e) {
+//         rowEl.classList.toggle("selected");
+//         this.querySelectorAll("button[data-target]").forEach(function(
+//             buttonEl
+//         ) {
+//             buttonEl.classList.toggle("hide");
+//         });
+//     });
+// });
 
-// Toggle action buttons on table row click
-document.querySelectorAll("table#vehicles tr").forEach(function(rowEl) {
-    rowEl.addEventListener("click", function(e) {
-        rowEl.classList.toggle("selected");
-        this.querySelectorAll("button[data-target]").forEach(function(
-            buttonEl
-        ) {
-            buttonEl.classList.toggle("hide");
-        });
+// // Toggle action buttons on table row click
+// document.querySelectorAll("table#vehicles tr").forEach(function(rowEl) {
+//     rowEl.addEventListener("click", function(e) {
+//         rowEl.classList.toggle("selected");
+//         this.querySelectorAll("button[data-target]").forEach(function(
+//             buttonEl
+//         ) {
+//             buttonEl.classList.toggle("hide");
+//         });
+//     });
+// });
+
+// Luhn algorithm
+// https://gist.github.com/DiegoSalazar/4075533
+// https://sv.wikipedia.org/wiki/Luhn-algoritmen
+function checkLuhn(value) {
+    if (/[^0-9]+/.test(value)) return false;
+
+    let nCheck = 0;
+    let bEven = false;
+    value = value.replace(/\D/g, "");
+
+    for (let n = value.length - 1; n >= 0; n--) {
+        let cDigit = value.charAt(n);
+        let nDigit = parseInt(cDigit, 10);
+
+        if (bEven && (nDigit *= 2) > 9) nDigit -= 9;
+
+        nCheck += nDigit;
+        bEven = !bEven;
+    }
+
+    return nCheck % 10 == 0;
+}
+
+function validateDate(date) {
+    let isValid;
+
+    let dob = new Date(date);
+    let today = new Date();
+    let past = new Date("1900-01-01");
+
+    if (
+        isNaN(dob) ||
+        +dob > +today ||
+        +dob < +past ||
+        new Date(dob.getFullYear() + 18, dob.getMonth(), dob.getDate()) >= today
+    ) {
+        isValid = false;
+    } else {
+        isValid = true;
+    }
+
+    return isValid;
+}
+
+// Validate vehicle form
+let vehicleForm = document.querySelector("form#vehicle");
+if (vehicleForm) {
+    vehicleForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let id = document.querySelector("input[name=id]").value;
+        let make = document.querySelector("select[name=make]").value;
+        let color = document.querySelector("select[name=color]").value;
+        let year = document.querySelector("input[name=year]").value;
+        let price = document.querySelector("input[name=price]").value;
+
+        let errors = [];
+
+        let parsedYear = parseInt(year, 10) || 0;
+        let parsedPrice = parseInt(price, 10) || 0;
+
+        let dateToday = new Date();
+
+        if (!/^[A-Z]{3}([0-9]{3}|[0-9]{2}[A-Z]{1})$/.test(id)) {
+            errors.push(
+                "License plate number must contain 3 characters A-Z followed by 3 digits 0-9 or 3 characters A-Z followed by 2 digits 0-9 followed by 1 character A-Z. E.g. ABC123, ABC12X"
+            );
+        }
+        if (!make.length) {
+            errors.push("Make must be selected");
+        }
+        if (!color.length) {
+            errors.push("Color must be selected");
+        }
+        if (parsedYear < 1901 || +new Date(year) > +dateToday) {
+            errors.push(
+                `Year must be a value between 1900 and ${dateToday.getFullYear()}`
+            );
+        }
+        if (parsedPrice < 1) {
+            errors.push("Price must have a positive value");
+        }
+
+        // Display errors or submit form
+        if (errors.length) {
+            alert(errors.join("\n"));
+        } else {
+            this.submit();
+        }
     });
-});
+}
+
+// Validate customer form
+let customerForm = document.querySelector("form#customer");
+if (customerForm) {
+    customerForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        let id = document.querySelector("input[name=id]");
+        let firstname = document.querySelector("input[name=firstname]");
+        let surname = document.querySelector("input[name=surname]");
+        let address = document.querySelector("input[name=address]");
+        let postcode = document.querySelector("input[name=postcode]");
+        let city = document.querySelector("input[name=city]");
+        let phone = document.querySelector("input[name=phone]");
+
+        let idMatch = id.value.match(
+            /^([0-9]{2})([0-9]{2})([0-9]{2})[0-9]{4}$/
+        );
+        let validId = false;
+        if (idMatch)
+            validId = validateDate(`${idMatch[1]}-${idMatch[2]}-${idMatch[3]}`);
+
+        if (!validId) {
+            alert("Personal identity number must have a valid date");
+        } else if (firstname.value.length < 2) {
+            alert("First name must consist of 2 or more characters");
+        } else if (surname.value.length < 2) {
+            alert("Surname must consist of 2 or more characters");
+        } else if (address.value.length < 1) {
+            alert("Address must consist of 1 or more characters");
+        } else if (city.value.length < 2) {
+            alert("city must consist of 2 or more characters");
+        } else if (!/^[0-9]{5}$/.test(postcode.value)) {
+            alert("Postcode must consist of 5 digits");
+        } else if (!/^[0]/.test(phone.value)) {
+            alert("Phone number must begin with the digit zero");
+        } else {
+            this.submit();
+        }
+    });
+}
 
 // Remove vehicle
 document

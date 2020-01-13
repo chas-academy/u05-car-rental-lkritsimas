@@ -7,6 +7,10 @@
         "controller": "VehicleController",
         "method": "add"
     },
+    "vehicles/edit/{id}": {
+        "controller": "VehicleController",
+        "method": "edit"
+    },
     "vehicles/remove/{id}": {
         "controller": "VehicleController",
         "method": "remove"
@@ -27,6 +31,10 @@
         "controller": "CustomerController",
         "method": "newCustomer"
     },
+    "customers/edit/{id}": {
+        "controller": "CustomerController",
+        "method": "edit"
+    },
     "customers/created": {
         "controller": "CustomerController",
         "method": "add"
@@ -36,15 +44,23 @@
         "method": "remove"
     },
     "rent": {
-        "controller": "CustomerController",
-        "method": "get"
+        "controller": "BookingController",
+        "method": "newRental"
+    },
+    "rent/new": {
+        "controller": "BookingController",
+        "method": "addBooking"
     },
     "return": {
-        "controller": "CustomerController",
-        "method": "get"
+        "controller": "BookingController",
+        "method": "newReturn"
+    },
+    "return/new": {
+        "controller": "BookingController",
+        "method": "addReturn"
     },
     "": {
-        "controller": "IndexController",
-        "method": "test"
+        "controller": "CustomerController",
+        "method": "get"
     }
 }

@@ -1,0 +1,50 @@
+{% extends "Base.html.twig" %}
+{% set title = 'Return vehicle' %}
+{% block content %}
+    <h2 class="headline">Return vehicle</h2>
+    <form method="POST" action="/return/new">
+        <table>
+            <tr>
+                <th>Vehicle</th>
+                <td>
+                    <select name="vehicleId">
+                        <option hidden disabled selected value>
+                            -- Select vehicle --
+                        </option>
+                        {% for vehicle in vehicles %}
+                            <option value="{{ vehicle.id }}">
+                                {{ vehicle.id }}
+                                –
+                                {{ vehicle.make }}
+                                ({{ vehicle.color }})
+                                {{ vehicle.price }}/day
+                            </option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tfoot>
+                <tr colspan="2">
+                    <td colspan="2">
+                        <button type="submit" class="block">Create</button>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </form>
+    {% block responseMessage %}
+        <div id="response-message">
+            {% if success %}
+                <div class="alert success">
+                    <h2>Success</h2>
+                    <p>{{ responseMessage }}</p>
+                </div>
+            {% elseif success is same as(false) %}
+                <div class="alert error">
+                    <h2>Error</h2>
+                    <p>{{ responseMessage }}</p>
+                </div>
+            {% endif %}
+        </div>
+    {% endblock %}
+{% endblock %}

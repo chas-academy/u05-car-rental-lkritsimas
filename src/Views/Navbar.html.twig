@@ -12,10 +12,10 @@
             <li {{ (route == 'vehicles') ? 'class="selected"' : '' }}>
                 <a href="/vehicles">Vehicles</a>
             </li>
-            <li>
+            <li {{ (route == 'rent') ? 'class="selected"' : '' }}>
                 <a href="/rent">Rent vehicle</a>
             </li>
-            <li>
+            <li {{ (route == 'return') ? 'class="selected"' : '' }}>
                 <a href="/return">Return vehicle</a>
             </li>
             <li {{ (route == 'history') ? 'class="selected"' : '' }}>

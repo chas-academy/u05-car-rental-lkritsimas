@@ -37,13 +37,11 @@ class VehicleController extends AbstractController
   {
     $data = $this->request->getData();
     if (empty($data)) throw new HTTPException("No POST data was provided", 500);
-    else if (empty($data["make"])) throw new HTTPException("No make was provided", 500);
-    else if (empty($data["color"])) throw new HTTPException("No color was provided", 500);
 
     $vehicleModel = new VehicleModel($this->db);
     $makes = $vehicleModel->getMakes();
     $colors = $vehicleModel->getColors();
-    $vehicleId = $vehicleModel->addVehicle($data["id"], $data["make"], $data["color"], $data["year"], $data["price"]);
+    $vehicleId = $vehicleModel->addVehicle(strtoupper($data["id"]), $data["make"], $data["color"], $data["year"], $data["price"]);
     $vehicle = [
       "id" => $vehicleId,
       "make" => $data["make"],
@@ -62,12 +60,40 @@ class VehicleController extends AbstractController
     ]);
   }
 
+  public function edit($data)
+  {
+    $vehicleModel = new VehicleModel($this->db);
+    $vehicleUpdated = null;
+
+    // Update vehicle if request method is POST
+    if ($this->request->getMethod() === "POST") {
+      $data = $this->request->getData();
+
+      if (empty($data))
+        throw new HTTPException("No POST data was provided", 500);
+      else
+        $vehicleUpdated = $vehicleModel->updateVehicle(strtoupper($data["id"]), $data["make"], $data["color"], $data["year"], $data["price"]);
+    }
+
+    $makes = $vehicleModel->getMakes();
+    $colors = $vehicleModel->getColors();
+    $vehicle = $vehicleModel->getVehicle(strtoupper($data["id"]));
+
+    return $this->render("EditVehicle.html.twig", [
+      "route" => "vehicles",
+      "success" => $vehicleUpdated,
+      "makes" => $makes,
+      "colors" => $colors,
+      "vehicle" => $vehicle
+    ]);
+  }
+
   public function remove()
   {
     $data = $this->request->getData();
 
     $vehicleModel = new VehicleModel($this->db);
-    $vehicleRemoved = $vehicleModel->removeVehicle($data["id"]);
+    $vehicleRemoved = $vehicleModel->removeVehicle(strtoupper($data["id"]));
 
     return json_encode(["success" => $vehicleRemoved]);
   }

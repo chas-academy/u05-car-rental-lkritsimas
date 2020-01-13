@@ -10,10 +10,12 @@ button {
     padding: 6px 12px;
     // text-transform: uppercase;
 
+    &.disabled,
     &:disabled {
         cursor: default;
         color: #999;
         background-color: #e6e6e6;
+        pointer-events: none;
 
         &.link {
             cursor: default;

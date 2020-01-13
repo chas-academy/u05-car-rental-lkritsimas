@@ -27,19 +27,20 @@
                     <td>{{ vehicle.price }}</td>
                     {% if vehicle.customer_id is empty %}
                         {% set isBooked = false %}
-                        <td colspan="2">Free</td>
+                        <td colspan="2">Available</td>
                     {% else %}
                         {% set isBooked = true %}
                         <td>{{ vehicle.customer_id }}</td>
-                        <td>{{ vehicle.created_at }}</td>
+                        <td>{{ vehicle.rented_at }}</td>
                     {% endif %}
                     <td>
-                        <button type="button" class="hide" data-id="{{ vehicle.id }}" data-target="editVehicle" {{ (isBooked) ? 'disabled' : '' }}>
+                        {# <button type="button" data-id="{{ vehicle.id }}" data-target="editVehicle" {{ (isBooked) ? 'disabled' : '' }}> #}
+                        <a href="vehicles/edit/{{ vehicle.id }}" class="btn small {{ (isBooked) ? 'disabled' : '' }}">
                             Edit
-                        </button>
+                        </a>
                     </td>
                     <td>
-                        <button type="button" class="link hide" data-id="{{ vehicle.id }}" data-target="removeVehicle" {{ (isBooked) ? 'disabled' : '' }}>
+                        <button type="button" class="link" data-id="{{ vehicle.id }}" data-target="removeVehicle" {{ (isBooked) ? 'disabled' : '' }}>
                             Remove
                         </button>
                     </td>

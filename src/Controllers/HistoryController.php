@@ -13,11 +13,12 @@ class HistoryController extends AbstractController
     $sum = 0;
 
     foreach ($bookings as $key => $booking) {
-      if (!empty($booking["closed_at"])) {
-        $createdDate = new \DateTime($booking["created_at"]);
-        $closedDate = new \DateTime($booking["closed_at"]);
+      if (!empty($booking["returned_at"])) {
+        $rentDate = new \DateTime($booking["rented_at"]);
+        $returnDate = new \DateTime($booking["returned_at"]);
         // Get difference between dates in days
-        $diffDays = $closedDate->diff($createdDate)->format("%a");
+        $diffDays = $returnDate->diff($rentDate)->format("%a");
+        if ($diffDays == 0) $diffDays = 1;
 
         // Add amount of days customer has rented vehicle to bookings array
         $bookings[$key]['days'] = $diffDays;

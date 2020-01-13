@@ -4,23 +4,51 @@ namespace CarRental\Controllers;
 
 use CarRental\Exceptions\HTTPException;
 use CarRental\Models\CustomerModel;
+use CarRental\Models\BookingModel;
 
 class CustomerController extends AbstractController
 {
   public function newCustomer()
   {
-    $vehicleModel = new CustomerModel($this->db);
-
     return $this->render("NewCustomer.html.twig", [
       "route" => "customers",
       "success" => null
     ]);
   }
 
+  public function edit($data)
+  {
+    $customerModel = new CustomerModel($this->db);
+    $customerUpdated = null;
+
+    // Update customer if request method is POST
+    if ($this->request->getMethod() === "POST") {
+      $data = $this->request->getData();
+
+      if (empty($data))
+        throw new HTTPException("No POST data was provided", 500);
+      else
+        $customerUpdated = $customerModel->updateCustomer($data["id"], $data["firstname"], $data["surname"], $data["address"], $data["postcode"], $data["city"], $data["phone"]);
+    }
+
+    $customer = $customerModel->getCustomer($data["id"]);
+
+    return $this->render("EditCustomer.html.twig", [
+      "route" => "customers",
+      "success" => $customerUpdated,
+      "customer" => $customer
+    ]);
+  }
+
   public function get()
   {
     $customerModel = new CustomerModel($this->db);
+    $bookingModel = new BookingModel($this->db);
     $customers = $customerModel->getCustomers();
+
+    foreach ($customers as $key => $customer) {
+      $customers[$key]['editable'] = $bookingModel->isBookingActive($customer['id']);
+    }
 
     return $this->render("Customers.html.twig", [
       "route" => "customers",
@@ -52,6 +80,23 @@ class CustomerController extends AbstractController
       "success" => $customerId ? true : false,
       "responseMessage" => $customerId ? "Successfully created user $customerId" : "Could not create user $customerId",
       "customerData" => $customer
+    ]);
+  }
+
+  public function update()
+  {
+    $data = $this->request->getData();
+    if (empty($data)) throw new HTTPException("No POST data was provided", 500);
+
+    var_dump($data);
+
+    $customerModel = new customerModel($this->db);
+    $customer = $customerModel->updateCustomer($data["id"], $data["firstname"], $data["surname"], $data["address"], $data["postcode"], $data["city"], $data["phone"]);
+
+    return $this->render("EditCustomer.html.twig", [
+      "route" => "customers",
+      "success" => null,
+      "customer" => $customer
     ]);
   }
 
