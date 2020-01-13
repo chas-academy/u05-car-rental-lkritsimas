@@ -70,15 +70,16 @@ function validateDate(date) {
 let vehicleForm = document.querySelector("form#vehicle");
 if (vehicleForm) {
     vehicleForm.addEventListener("submit", function(e) {
+        // Prevent form from being submitted
         e.preventDefault();
+
+        let errors = [];
 
         let id = document.querySelector("input[name=id]").value;
         let make = document.querySelector("select[name=make]").value;
         let color = document.querySelector("select[name=color]").value;
         let year = document.querySelector("input[name=year]").value;
         let price = document.querySelector("input[name=price]").value;
-
-        let errors = [];
 
         let parsedYear = parseInt(year, 10) || 0;
         let parsedPrice = parseInt(price, 10) || 0;
@@ -118,7 +119,10 @@ if (vehicleForm) {
 let customerForm = document.querySelector("form#customer");
 if (customerForm) {
     customerForm.addEventListener("submit", function(e) {
+        // Prevent form from being submitted
         e.preventDefault();
+
+        let errors = [];
 
         let id = document.querySelector("input[name=id]");
         let firstname = document.querySelector("input[name=firstname]");
@@ -132,23 +136,35 @@ if (customerForm) {
             /^([0-9]{2})([0-9]{2})([0-9]{2})[0-9]{4}$/
         );
         let validId = false;
-        if (idMatch)
+        if (idMatch) {
             validId = validateDate(`${idMatch[1]}-${idMatch[2]}-${idMatch[3]}`);
+        }
 
         if (!validId) {
-            alert("Personal identity number must have a valid date");
-        } else if (firstname.value.length < 2) {
-            alert("First name must consist of 2 or more characters");
-        } else if (surname.value.length < 2) {
-            alert("Surname must consist of 2 or more characters");
-        } else if (address.value.length < 1) {
-            alert("Address must consist of 1 or more characters");
-        } else if (city.value.length < 2) {
-            alert("city must consist of 2 or more characters");
-        } else if (!/^[0-9]{5}$/.test(postcode.value)) {
-            alert("Postcode must consist of 5 digits");
-        } else if (!/^[0]/.test(phone.value)) {
-            alert("Phone number must begin with the digit zero");
+            errors.push("Personal identity number must have a valid date");
+        }
+        if (firstname.value.length < 2) {
+            errors.push("First name must consist of 2 or more characters");
+        }
+        if (surname.value.length < 2) {
+            errors.push("Surname must consist of 2 or more characters");
+        }
+        if (address.value.length < 1) {
+            errors.push("Address must consist of 1 or more characters");
+        }
+        if (city.value.length < 2) {
+            errors.push("city must consist of 2 or more characters");
+        }
+        if (!/^[0-9]{5}$/.test(postcode.value)) {
+            errors.push("Postcode must consist of 5 digits");
+        }
+        if (!/^[0]/.test(phone.value)) {
+            errors.push("Phone number must begin with the digit zero");
+        }
+
+        // Display errors or submit form
+        if (errors.length) {
+            alert(errors.join("\n"));
         } else {
             this.submit();
         }
