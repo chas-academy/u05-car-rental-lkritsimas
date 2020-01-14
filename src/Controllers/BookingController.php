@@ -9,70 +9,62 @@ use CarRental\Models\BookingModel;
 
 class BookingController extends AbstractController
 {
-  public function newRental()
+  public function rent()
   {
+    $bookingModel = new BookingModel($this->db);
     $vehicleModel = new VehicleModel($this->db);
     $customerModel = new CustomerModel($this->db);
-    $bookingModel = new BookingModel($this->db);
+    $created = null;
+    $response = null;
 
-    $vehicles = $vehicleModel->getVehicles(true);
+    if ($this->request->getMethod() === "POST") {
+      $data = $this->request->getData();
 
+      if (empty($data))
+        throw new HTTPException("No POST data was provided", 500);
+      else {
+        $created = $bookingModel->addBooking($data["customerId"], $data["vehicleId"]);
+        $response = $created ? "Rented vehicle " . $data["vehicleId"] : "Could not rent vehicle " . $data["vehicleId"];
+      }
+    }
+
+    $vehicles = $vehicleModel->getVehicles();
     foreach ($vehicles as $key => $vehicle) {
       $vehicles[$key]['editable'] = !$bookingModel->isBookingActive($vehicle['id'], 'vehicle');
     }
 
     return $this->render("RentVehicle.html.twig", [
       "route" => "rent",
-      "success" => null,
+      "success" => $created,
+      "responseMessage" => $response,
       "vehicles" => $vehicles,
       "customers" => $customerModel->getCustomers()
     ]);
   }
 
-  public function newReturn()
+  public function return()
   {
+    $bookingModel = new BookingModel($this->db);
     $vehicleModel = new VehicleModel($this->db);
+    $returned = null;
+    $response = null;
+
+    if ($this->request->getMethod() === "POST") {
+      $data = $this->request->getData();
+
+      if (empty($data))
+        throw new HTTPException("No POST data was provided", 500);
+      else {
+        $returned = $bookingModel->addReturn($data["vehicleId"]);
+        $response = $returned ? "Returned vehicle " . $data["vehicleId"] : "Could not return vehicle " . $data["vehicleId"];
+      }
+    }
 
     return $this->render("ReturnVehicle.html.twig", [
       "route" => "return",
-      "success" => null,
-      "vehicles" => $vehicleModel->getVehicles(false)
-    ]);
-  }
-
-  public function addBooking()
-  {
-    $data = $this->request->getData();
-    if (empty($data)) throw new HTTPException("No POST data was provided", 500);
-
-    $bookingModel = new BookingModel($this->db);
-    $vehicleModel = new VehicleModel($this->db);
-    $customerModel = new CustomerModel($this->db);
-    $created = $bookingModel->addBooking($data["customerId"], $data["vehicleId"]);
-
-    return $this->render("RentVehicle.html.twig", [
-      "route" => "vehicles",
-      "success" => $created ? true : false,
-      "responseMessage" => $created ? "Rented vehicle " . $data["vehicleId"] : "Could not rent vehicle " . $data["vehicleId"],
-      "vehicles" => $vehicleModel->getVehicles(true),
-      "customers" => $customerModel->getCustomers()
-    ]);
-  }
-
-  public function addReturn()
-  {
-    $data = $this->request->getData();
-    if (empty($data)) throw new HTTPException("No POST data was provided", 500);
-
-    $bookingModel = new BookingModel($this->db);
-    $vehicleModel = new VehicleModel($this->db);
-    $returned = $bookingModel->addReturn($data["vehicleId"]);
-
-    return $this->render("ReturnVehicle.html.twig", [
-      "route" => "vehicles",
-      "success" => $returned ? true : false,
-      "responseMessage" => $returned ? "Returned vehicle " . $data["vehicleId"] : "Could not return vehicle " . $data["vehicleId"],
-      "vehicles" => $vehicleModel->getVehicles(false)
+      "success" => $returned,
+      "responseMessage" => $response,
+      "vehicles" => $vehicleModel->getVehicles()
     ]);
   }
 }
