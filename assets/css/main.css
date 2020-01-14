@@ -155,7 +155,6 @@ table.rounded tbody tr {
 
 table.rounded tbody tr:hover td,
 table.rounded tbody tr.selected td {
-  cursor: pointer;
   background-color: #dfdfdf;
 }
 
@@ -264,13 +263,5 @@ h6 {
 
 .text-right {
   text-align: right;
-}
-
-.hide {
-  visibility: hidden;
-}
-
-.show {
-  visibility: visible;
 }
 /*# sourceMappingURL=main.css.map */

@@ -34,7 +34,6 @@ class Router
           // Remove full match
           array_shift($matches);
 
-          // if ($this->match($route, $path, $params, &$map)) {
           if ($matches) {
             return $this->callAction($request, $data["controller"], $data["method"], $matches);
           }

@@ -12,8 +12,8 @@
                 <th>Color</th>
                 <th>Year</th>
                 <th>Price</th>
-                <th>Hired by</th>
-                <th>Hired date</th>
+                <th>Rented by</th>
+                <th>Rental date</th>
                 <th colspan="2"></th>
             </tr>
         </thead>
@@ -25,7 +25,7 @@
                     <td>{{ vehicle.color }}</td>
                     <td>{{ vehicle.year }}</td>
                     <td>{{ vehicle.price }}</td>
-                    {% if vehicle.customer_id is empty %}
+                    {% if vehicle.editable == false %}
                         {% set isBooked = false %}
                         <td colspan="2">Available</td>
                     {% else %}

@@ -7,13 +7,16 @@ use CarRental\Exceptions\DatabaseException;
 
 class BookingModel extends AbstractModel
 {
-  public function isBookingActive($id)
+  public function isBookingActive($id, $type = 'customer')
   {
     $result = [];
     $query = "SELECT COALESCE(returned_at, TRUE) AS active 
-              FROM booking 
-              WHERE customer_id = :id 
-                AND returned_at IS NULL";
+              FROM booking";
+    if ($type === 'customer')
+      $query .= " WHERE customer_id = :id";
+    else if ($type === 'vehicle')
+      $query .= " WHERE vehicle_id = :id";
+    $query .= " AND returned_at IS NULL";
 
     try {
       // Perform query
@@ -95,7 +98,8 @@ class BookingModel extends AbstractModel
   public function addReturn($vehicleId)
   {
     $result = [];
-    $query = "UPDATE booking SET `returned_at` = NOW() WHERE vehicle_id = :vehicleId";
+    $query = "UPDATE booking SET returned_at = NOW() 
+              WHERE vehicle_id = :vehicleId AND returned_at IS NULL";
 
     try {
       // Perform query

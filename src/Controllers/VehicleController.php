@@ -27,7 +27,12 @@ class VehicleController extends AbstractController
   public function get()
   {
     $vehicleModel = new VehicleModel($this->db);
+    $bookingModel = new BookingModel($this->db);
     $vehicles = $vehicleModel->getVehicles();
+
+    foreach ($vehicles as $key => $vehicle) {
+      $vehicles[$key]['editable'] = $bookingModel->isBookingActive($vehicle['id'], 'vehicle');
+    }
 
     return $this->render("Vehicles.html.twig", [
       "route" => "vehicles",
