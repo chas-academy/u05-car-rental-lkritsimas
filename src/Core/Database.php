@@ -10,27 +10,27 @@ use CarRental\Utils\Singleton;
 
 class Database
 {
-    public $handler;
+  public $handler;
 
-    public function __construct($config)
-    {
-        try {
-            $this->handler = new PDO(
-                $config['type'] . ':' .
-                    'host=' . $config['host'] .
-                    ';dbname=' . $config['database'],
-                $config['user'],
-                $config['password']
-            );
+  public function __construct($config)
+  {
+    try {
+      $this->handler = new PDO(
+        $config['type'] . ':' .
+          'host=' . $config['host'] .
+          ';dbname=' . $config['database'],
+        $config['user'],
+        $config['password']
+      );
 
-            $pdoOptions = [
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-            ];
+      $pdoOptions = [
+        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+      ];
 
-            $this->handler->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        } catch (PDOException $e) {
-            return $e->getMessage();
-        }
+      $this->handler->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+      return $e->getMessage();
     }
+  }
 }

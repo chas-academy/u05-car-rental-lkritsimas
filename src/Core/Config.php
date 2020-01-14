@@ -7,23 +7,23 @@ use CarRental\Exceptions\NotFoundException;
 
 class Config
 {
-    // Config data is stored here
-    private $data;
+  // Config data is stored here
+  private $data;
 
-    public function __construct()
-    {
-        // Load config file and decode
-        $json = file_get_contents(__DIR__ . "/../../config/app.json");
-        $this->data = json_decode($json, true);
+  public function __construct()
+  {
+    // Load config file and decode
+    $json = file_get_contents(__DIR__ . "/../../config/app.json");
+    $this->data = json_decode($json, true);
+  }
+
+  public function get($key)
+  {
+    // Check if key exists in config, if not, throw error
+    if (!isset($this->data[$key])) {
+      throw (new NotFoundException("Key $key was not found in config."));
     }
 
-    public function get($key)
-    {
-        // Check if key exists in config, if not, throw error
-        if (!isset($this->data[$key])) {
-            throw (new NotFoundException("Key $key was not found in config."));
-        }
-
-        return $this->data[$key];
-    }
+    return $this->data[$key];
+  }
 }
