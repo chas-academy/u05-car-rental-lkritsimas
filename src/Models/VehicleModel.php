@@ -7,7 +7,7 @@ use CarRental\Exceptions\DatabaseException;
 
 class VehicleModel extends AbstractModel
 {
-  public function getVehicles($isAvailable = null)
+  public function getVehiclesWithBooking($isAvailable = null)
   {
     $result = [];
     $query = "SELECT 
@@ -29,6 +29,36 @@ class VehicleModel extends AbstractModel
         $query .= " WHERE booking.vehicle_id IS NOT NULL AND booking.returned_at IS NULL";
     }
     $query .= " ORDER BY vehicles.created_at";
+
+    try {
+      // Perform query
+      $statement = $this->db->prepare($query);
+
+      $statement->execute();
+      $result = $statement->fetchAll();
+
+      // Render error page
+    } catch (DatabaseException $e) {
+      $this->di->get("Twig_Environment")->render("Error.html.twig", [
+        "code" => $e->getCode(),
+        "message" => $e->getMessage()
+      ]);
+    }
+
+    return $result;
+  }
+
+  public function getVehicles($isAvailable = null)
+  {
+    $result = [];
+    $query = "SELECT 
+                vehicles.*,
+                makes.make,
+                colors.color
+              FROM vehicles
+              LEFT JOIN makes ON makes.id = vehicles.make 
+              LEFT JOIN colors ON colors.id = vehicles.color
+              ORDER BY vehicles.created_at";
 
     try {
       // Perform query

@@ -1,10 +1,6 @@
 {
     "vehicles/new": {
         "controller": "VehicleController",
-        "method": "newVehicle"
-    },
-    "vehicles/created": {
-        "controller": "VehicleController",
         "method": "add"
     },
     "vehicles/edit/{id}": {
@@ -29,15 +25,11 @@
     },
     "customers/new": {
         "controller": "CustomerController",
-        "method": "newCustomer"
+        "method": "add"
     },
     "customers/edit/{id}": {
         "controller": "CustomerController",
         "method": "edit"
-    },
-    "customers/created": {
-        "controller": "CustomerController",
-        "method": "add"
     },
     "customers/remove/{id}": {
         "controller": "CustomerController",

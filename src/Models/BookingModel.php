@@ -24,11 +24,7 @@ class BookingModel extends AbstractModel
 
       $statement->execute([':id' => $id]);
       $result = $statement->fetch();
-
-      if (!empty($result))
-        $result = true;
-      else
-        $result = false;
+      $result = (!empty($result) ? true : false);
 
       // Render error page
     } catch (DatabaseException $e) {

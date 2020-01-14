@@ -43,21 +43,27 @@ class VehicleController extends AbstractController
   // Add new vehicle
   public function add()
   {
-    $data = $this->request->getData();
-    if (empty($data)) throw new HTTPException("No POST data was provided", 500);
-
     $vehicleModel = new VehicleModel($this->db);
+    $created = null;
+
+    if ($this->request->getMethod() === "POST") {
+      $data = $this->request->getData();
+
+      if (empty($data))
+        throw new HTTPException("No POST data was provided", 500);
+      else
+        $created = $vehicleModel->addVehicle(strtoupper($data["id"]), $data["make"], $data["color"], $data["year"], $data["price"]);
+    }
+
     $makes = $vehicleModel->getMakes();
     $colors = $vehicleModel->getColors();
-    $created = $vehicleModel->addVehicle(strtoupper($data["id"]), $data["make"], $data["color"], $data["year"], $data["price"]);
 
     return $this->render("NewVehicle.html.twig", [
       "route" => "vehicles",
       "makes" => $makes,
       "colors" => $colors,
-      "success" => $created ? true : false,
-      "responseMessage" => $created ? "Successfully created vehicle" : "Could not create vehicle",
-      "vehicleData" => $data
+      "success" => $created,
+      "responseMessage" => $created ? "Successfully created vehicle" : "Could not create vehicle"
     ]);
   }
 

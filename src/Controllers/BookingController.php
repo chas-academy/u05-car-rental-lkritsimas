@@ -13,11 +13,18 @@ class BookingController extends AbstractController
   {
     $vehicleModel = new VehicleModel($this->db);
     $customerModel = new CustomerModel($this->db);
+    $bookingModel = new BookingModel($this->db);
+
+    $vehicles = $vehicleModel->getVehicles(true);
+
+    foreach ($vehicles as $key => $vehicle) {
+      $vehicles[$key]['editable'] = !$bookingModel->isBookingActive($vehicle['id'], 'vehicle');
+    }
 
     return $this->render("RentVehicle.html.twig", [
       "route" => "rent",
       "success" => null,
-      "vehicles" => $vehicleModel->getVehicles(true),
+      "vehicles" => $vehicles,
       "customers" => $customerModel->getCustomers()
     ]);
   }
