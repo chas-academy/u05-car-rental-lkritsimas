@@ -8,6 +8,7 @@ use CarRental\Models\BookingModel;
 
 class VehicleController extends AbstractController
 {
+  // Render the new vehicle view
   public function newVehicle()
   {
     $vehicleModel = new VehicleModel($this->db);
@@ -22,6 +23,7 @@ class VehicleController extends AbstractController
     ]);
   }
 
+  // Get all vehicles
   public function get()
   {
     $vehicleModel = new VehicleModel($this->db);
@@ -33,6 +35,7 @@ class VehicleController extends AbstractController
     ]);
   }
 
+  // Add new vehicle
   public function add()
   {
     $data = $this->request->getData();
@@ -41,25 +44,19 @@ class VehicleController extends AbstractController
     $vehicleModel = new VehicleModel($this->db);
     $makes = $vehicleModel->getMakes();
     $colors = $vehicleModel->getColors();
-    $vehicleId = $vehicleModel->addVehicle(strtoupper($data["id"]), $data["make"], $data["color"], $data["year"], $data["price"]);
-    $vehicle = [
-      "id" => $vehicleId,
-      "make" => $data["make"],
-      "color" => $data["color"],
-      "year" => $data["year"],
-      "price" => $data["price"]
-    ];
+    $vehicleAdded = $vehicleModel->addVehicle(strtoupper($data["id"]), $data["make"], $data["color"], $data["year"], $data["price"]);
 
     return $this->render("NewVehicle.html.twig", [
       "route" => "vehicles",
       "makes" => $makes,
       "colors" => $colors,
-      "success" => $vehicleId ? true : false,
-      "responseMessage" => $vehicleId ? "Successfully created vehicle $vehicleId" : "Could not create vehicle $vehicleId",
-      "vehicleData" => $vehicle
+      "success" => $vehicleAdded ? true : false,
+      "responseMessage" => $vehicleAdded ? "Successfully created vehicle" : "Could not create vehicle",
+      "vehicleData" => $data
     ]);
   }
 
+  // Edit vehicle
   public function edit($data)
   {
     $vehicleModel = new VehicleModel($this->db);
@@ -88,6 +85,7 @@ class VehicleController extends AbstractController
     ]);
   }
 
+  // Remove vehicle
   public function remove()
   {
     $data = $this->request->getData();

@@ -27,8 +27,7 @@ class BookingModel extends AbstractModel
       else
         $result = false;
 
-      // Throw exception if query fails
-      // if (!$result) throw new DatabaseException($this->db->errorInfo());
+      // Render error page
     } catch (DatabaseException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
@@ -56,8 +55,7 @@ class BookingModel extends AbstractModel
       $statement->execute();
       $result = $statement->fetchAll();
 
-      // Throw exception if query fails
-      if (!$result) throw new DatabaseException($this->db->errorInfo());
+      // Render error page
     } catch (DatabaseException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
@@ -83,8 +81,7 @@ class BookingModel extends AbstractModel
         ":vehicleId" => $vehicleId
       ]);
 
-      // Throw exception if query fails
-      // if (!$result) throw new DatabaseException($this->db->errorInfo());
+      // Render error page
     } catch (\PDOException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
@@ -108,8 +105,7 @@ class BookingModel extends AbstractModel
         ":vehicleId" => $vehicleId
       ]);
 
-      // Throw exception if query fails
-      // if (!$result) throw new DatabaseException($this->db->errorInfo());
+      // Render error page
     } catch (\PDOException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),

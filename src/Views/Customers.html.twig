@@ -35,7 +35,6 @@
                         {% set isBooked = true %}
                     {% endif %}
                     <td>
-                        {# <button type="button" class="hide" data-id="{{ customer.id }}" data-target="editCustomer" {{ (isBooked) ? 'disabled' : '' }}> #}
                         <a href="customers/edit/{{ customer.id }}" class="btn small {{ (isBooked) ? 'disabled' : '' }}">
                             Edit
                         </a>

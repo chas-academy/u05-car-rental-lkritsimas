@@ -64,7 +64,7 @@ class BookingController extends AbstractController
         return $this->render("ReturnVehicle.html.twig", [
             "route" => "vehicles",
             "success" => $bookingId ? true : false,
-            "responseMessage" => $bookingId ? "Returned vehicle" . $data["vehicleId"] . "with booking ID $bookingId" : "Could not create vehicle $bookingId",
+            "responseMessage" => $bookingId ? "Returned vehicle " . $data["vehicleId"] . " with booking ID $bookingId" : "Could not create vehicle $bookingId",
             "vehicles" => $vehicleModel->getVehicles(false)
         ]);
     }

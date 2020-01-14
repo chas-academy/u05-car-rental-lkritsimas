@@ -13,14 +13,8 @@ $dbConfig = $config->get('database');
 $db = new Database($dbConfig);
 $db = $db->handler;
 
-$statement = $db->prepare("SELECT * FROM customers");
-$statement->execute();
-
 $loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/src/Views');
 $view = new \Twig\Environment($loader);
-
-// var_dump($statement->fetchAll());
-// var_dump($config);
 
 $di = new DependencyInjector();
 $di->set('PDO', $db);

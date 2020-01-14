@@ -34,7 +34,6 @@
                         <td>{{ vehicle.rented_at }}</td>
                     {% endif %}
                     <td>
-                        {# <button type="button" data-id="{{ vehicle.id }}" data-target="editVehicle" {{ (isBooked) ? 'disabled' : '' }}> #}
                         <a href="vehicles/edit/{{ vehicle.id }}" class="btn small {{ (isBooked) ? 'disabled' : '' }}">
                             Edit
                         </a>

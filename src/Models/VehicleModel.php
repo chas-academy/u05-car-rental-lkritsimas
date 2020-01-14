@@ -18,10 +18,10 @@ class VehicleModel extends AbstractModel
                 makes.make,
                 colors.color
               FROM vehicles
-                LEFT JOIN makes ON makes.id = vehicles.make 
-                LEFT JOIN colors ON colors.id = vehicles.color
-                LEFT JOIN booking ON booking.vehicle_id = vehicles.id 
-                LEFT JOIN customers ON customers.id = booking.customer_id";
+              LEFT JOIN makes ON makes.id = vehicles.make 
+              LEFT JOIN colors ON colors.id = vehicles.color
+              LEFT JOIN booking ON booking.vehicle_id = vehicles.id 
+              LEFT JOIN customers ON customers.id = booking.customer_id";
     if ($isAvailable !== null) {
       if ($isAvailable === true)
         $query .= " WHERE booking.vehicle_id IS NULL OR booking.returned_at <= NOW()";
@@ -37,8 +37,7 @@ class VehicleModel extends AbstractModel
       $statement->execute();
       $result = $statement->fetchAll();
 
-      // Throw exception if query fails
-      // if (!$result) throw new DatabaseException($this->db->errorInfo());
+      // Render error page
     } catch (DatabaseException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
@@ -68,8 +67,7 @@ class VehicleModel extends AbstractModel
       $statement->execute([":id" => $id]);
       $result = $statement->fetch();
 
-      // Throw exception if query fails
-      // if (!$result) throw new DatabaseException($this->db->errorInfo());
+      // Render error page
     } catch (DatabaseException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
@@ -92,8 +90,7 @@ class VehicleModel extends AbstractModel
       $statement->execute();
       $result = $statement->fetchAll();
 
-      // Throw exception if query fails
-      if (!$result) throw new DatabaseException($this->db->errorInfo());
+      // Render error page
     } catch (DatabaseException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
@@ -116,8 +113,7 @@ class VehicleModel extends AbstractModel
       $statement->execute();
       $result = $statement->fetchAll();
 
-      // Throw exception if query fails
-      if (!$result) throw new DatabaseException($this->db->errorInfo());
+      // Render error page
     } catch (DatabaseException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
@@ -146,8 +142,7 @@ class VehicleModel extends AbstractModel
         ":price" => $price
       ]);
 
-      // Throw exception if query fails
-      // if (!$result) throw new DatabaseException($this->db->errorInfo());
+      // Render error page
     } catch (\PDOException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
@@ -181,8 +176,7 @@ class VehicleModel extends AbstractModel
         ":price" => $price
       ]);
 
-      // Throw exception if query fails
-      // if (!$result) throw new DatabaseException($this->db->errorInfo());
+      // Render error page
     } catch (\PDOException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),
@@ -205,8 +199,7 @@ class VehicleModel extends AbstractModel
 
       $result = $statement->rowCount();
 
-      // Throw exception if query fails
-      // if (!$result) throw new DatabaseException($this->db->errorInfo());
+      // Render error page
     } catch (\PDOException $e) {
       $this->di->get("Twig_Environment")->render("Error.html.twig", [
         "code" => $e->getCode(),

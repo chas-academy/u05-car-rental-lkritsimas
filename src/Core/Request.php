@@ -10,10 +10,6 @@ class Request
 
     public function __construct()
     {
-        // $pathArray = explode(
-        //     "?", 
-        //     filter_var($_SERVER["REQUEST_URI"], FILTER_SANITIZE_URL)
-        // );
         $pathArray = explode("?", $_SERVER["REQUEST_URI"]);
         $this->path = substr($pathArray[0], 1);
         $this->method = $_SERVER["REQUEST_METHOD"];
