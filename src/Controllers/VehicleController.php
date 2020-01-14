@@ -44,14 +44,14 @@ class VehicleController extends AbstractController
     $vehicleModel = new VehicleModel($this->db);
     $makes = $vehicleModel->getMakes();
     $colors = $vehicleModel->getColors();
-    $vehicleAdded = $vehicleModel->addVehicle(strtoupper($data["id"]), $data["make"], $data["color"], $data["year"], $data["price"]);
+    $created = $vehicleModel->addVehicle(strtoupper($data["id"]), $data["make"], $data["color"], $data["year"], $data["price"]);
 
     return $this->render("NewVehicle.html.twig", [
       "route" => "vehicles",
       "makes" => $makes,
       "colors" => $colors,
-      "success" => $vehicleAdded ? true : false,
-      "responseMessage" => $vehicleAdded ? "Successfully created vehicle" : "Could not create vehicle",
+      "success" => $created ? true : false,
+      "responseMessage" => $created ? "Successfully created vehicle" : "Could not create vehicle",
       "vehicleData" => $data
     ]);
   }

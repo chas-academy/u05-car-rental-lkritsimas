@@ -64,22 +64,13 @@ class CustomerController extends AbstractController
     if (empty($data)) throw new HTTPException("No POST data was provided", 500);
 
     $customerModel = new CustomerModel($this->db);
-    $customerId = $customerModel->addCustomer($data["id"], $data["firstname"], $data["surname"], $data["address"], $data["postcode"], $data["city"], $data["phone"]);
-    $customer = [
-      "id" => $customerId,
-      "firstname" => $data["firstname"],
-      "surname" => $data["surname"],
-      "address" => $data["address"],
-      "postcode" => $data["postcode"],
-      "city" => $data["city"],
-      "phone" => $data["phone"]
-    ];
+    $created = $customerModel->addCustomer($data["id"], $data["firstname"], $data["surname"], $data["address"], $data["postcode"], $data["city"], $data["phone"]);
 
     return $this->render("NewCustomer.html.twig", [
       "route" => "customers",
-      "success" => $customerId ? true : false,
-      "responseMessage" => $customerId ? "Successfully created user $customerId" : "Could not create user $customerId",
-      "customerData" => $customer
+      "success" => $created ? true : false,
+      "responseMessage" => $created ? "Successfully created user " . $data["id"] : "Could not create user " . $data["id"],
+      "customerData" => $data
     ]);
   }
 
@@ -87,8 +78,6 @@ class CustomerController extends AbstractController
   {
     $data = $this->request->getData();
     if (empty($data)) throw new HTTPException("No POST data was provided", 500);
-
-    var_dump($data);
 
     $customerModel = new customerModel($this->db);
     $customer = $customerModel->updateCustomer($data["id"], $data["firstname"], $data["surname"], $data["address"], $data["postcode"], $data["city"], $data["phone"]);
