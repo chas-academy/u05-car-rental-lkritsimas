@@ -41,12 +41,12 @@ class BookingController extends AbstractController
     $bookingModel = new BookingModel($this->db);
     $vehicleModel = new VehicleModel($this->db);
     $customerModel = new CustomerModel($this->db);
-    $bookingId = $bookingModel->addBooking($data["customerId"], $data["vehicleId"]);
+    $created = $bookingModel->addBooking($data["customerId"], $data["vehicleId"]);
 
     return $this->render("RentVehicle.html.twig", [
       "route" => "vehicles",
-      "success" => $bookingId ? true : false,
-      "responseMessage" => $bookingId ? "Created vehicle $bookingId" : "Could not create vehicle $bookingId",
+      "success" => $created ? true : false,
+      "responseMessage" => $created ? "Rented vehicle " . $data["vehicleId"] : "Could not rent vehicle " . $data["vehicleId"],
       "vehicles" => $vehicleModel->getVehicles(true),
       "customers" => $customerModel->getCustomers()
     ]);
@@ -59,12 +59,12 @@ class BookingController extends AbstractController
 
     $bookingModel = new BookingModel($this->db);
     $vehicleModel = new VehicleModel($this->db);
-    $bookingId = $bookingModel->addReturn($data["vehicleId"]);
+    $returned = $bookingModel->addReturn($data["vehicleId"]);
 
     return $this->render("ReturnVehicle.html.twig", [
       "route" => "vehicles",
-      "success" => $bookingId ? true : false,
-      "responseMessage" => $bookingId ? "Returned vehicle " . $data["vehicleId"] . " with booking ID $bookingId" : "Could not create vehicle $bookingId",
+      "success" => $returned ? true : false,
+      "responseMessage" => $returned ? "Returned vehicle " . $data["vehicleId"] : "Could not return vehicle " . $data["vehicleId"],
       "vehicles" => $vehicleModel->getVehicles(false)
     ]);
   }
