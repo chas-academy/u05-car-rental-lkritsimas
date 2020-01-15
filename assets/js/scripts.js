@@ -3,7 +3,7 @@ function validateDate(date) {
     let today = new Date();
     let past = new Date("1900-01-01");
 
-    return (
+    return !(
         isNaN(dob) ||
         +dob > +today ||
         +dob < +past ||

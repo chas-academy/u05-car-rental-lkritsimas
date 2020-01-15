@@ -57,19 +57,5 @@
             </tfoot>
         </table>
     </form>
-    {% block responseMessage %}
-        <div id="response-message">
-            {% if success %}
-                <div class="alert success">
-                    <h2>Success</h2>
-                    <p>{{ responseMessage }}</p>
-                </div>
-            {% elseif success is same as(false) %}
-                <div class="alert error">
-                    <h2>Error</h2>
-                    <p>{{ responseMessage }}</p>
-                </div>
-            {% endif %}
-        </div>
-    {% endblock %}
+    {% include("ResponseMessage.html.twig") %}
 {% endblock %}
