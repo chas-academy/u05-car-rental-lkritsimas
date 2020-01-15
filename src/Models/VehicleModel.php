@@ -14,12 +14,8 @@ class VehicleModel extends AbstractModel
                 vehicles.*,
                 booking.vehicle_id,
                 booking.customer_id,
-                booking.rented_at,
-                makes.make,
-                colors.color
+                booking.rented_at
               FROM vehicles
-              LEFT JOIN makes ON makes.id = vehicles.make 
-              LEFT JOIN colors ON colors.id = vehicles.color
               LEFT JOIN booking ON booking.vehicle_id = vehicles.id 
               LEFT JOIN customers ON customers.id = booking.customer_id";
     if ($isAvailable !== null) {
@@ -52,13 +48,9 @@ class VehicleModel extends AbstractModel
   {
     $result = [];
     $query = "SELECT 
-                vehicles.*,
-                makes.make,
-                colors.color
+                *
               FROM vehicles
-              LEFT JOIN makes ON makes.id = vehicles.make 
-              LEFT JOIN colors ON colors.id = vehicles.color
-              ORDER BY vehicles.created_at";
+              ORDER BY created_at";
 
     try {
       // Perform query
@@ -82,13 +74,9 @@ class VehicleModel extends AbstractModel
   {
     $result = [];
     $query = "SELECT 
-                vehicles.*,
-                makes.make,
-                colors.color
+                *
               FROM vehicles
-              LEFT JOIN makes ON makes.id = vehicles.make 
-              LEFT JOIN colors ON colors.id = vehicles.color
-              WHERE vehicles.id = :id";
+              WHERE id = :id";
 
     try {
       // Perform query

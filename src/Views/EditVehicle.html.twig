@@ -16,7 +16,7 @@
                 <td>
                     <select name="make" placeholder="Select make">
                         {% for make in makes %}
-                            <option {{ vehicle.make == make.make ? "selected" : "" }} value="{{ make.id }}">{{ make.make }}</option>
+                            <option {{ vehicle.make == make.make ? "selected" : "" }} value="{{ make.make }}">{{ make.make }}</option>
                         {% endfor %}
                     </select>
                 </td>
@@ -26,7 +26,7 @@
                 <td>
                     <select name="color" placeholder="Select color">
                         {% for color in colors %}
-                            <option {{ vehicle.color == color.color ? "selected" : "" }} value="{{ color.id }}">{{ color.color }}</option>
+                            <option {{ vehicle.color == color.color ? "selected" : "" }} value="{{ color.color }}">{{ color.color }}</option>
                         {% endfor %}
                     </select>
                 </td>

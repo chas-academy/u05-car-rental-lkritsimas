@@ -60,11 +60,16 @@ class BookingController extends AbstractController
       }
     }
 
+    $vehicles = $vehicleModel->getVehicles();
+    foreach ($vehicles as $key => $vehicle) {
+      $vehicles[$key]['editable'] = !$bookingModel->isBookingActive($vehicle['id'], 'vehicle');
+    }
+
     return $this->render("ReturnVehicle.html.twig", [
       "route" => "return",
       "success" => $returned,
       "responseMessage" => $response,
-      "vehicles" => $vehicleModel->getVehicles()
+      "vehicles" => $vehicles
     ]);
   }
 }

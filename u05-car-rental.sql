@@ -14,8 +14,8 @@ CREATE TABLE `customers` (
 );
 CREATE TABLE `vehicles` (
   `id` CHAR(6) PRIMARY KEY,
-  `make` INT UNSIGNED NOT NULL,
-  `color` INT UNSIGNED NOT NULL,
+  `make` VARCHAR(32) NOT NULL,
+  `color` VARCHAR(32) NOT NULL,
   `year` YEAR NOT NULL,
   `price` DECIMAL(8, 2) NOT NULL,
   `created_at` DATETIME NOT NULL
@@ -27,14 +27,8 @@ CREATE TABLE `booking` (
   `rented_at` DATETIME NOT NULL,
   `returned_at` DATETIME NULL
 );
-CREATE TABLE `colors` (
-  `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  `color` VARCHAR(255) UNIQUE NOT NULL
-);
-CREATE TABLE `makes` (
-  `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  `make` VARCHAR(255) UNIQUE NOT NULL
-);
+CREATE TABLE `colors` (`color` VARCHAR(32) PRIMARY KEY);
+CREATE TABLE `makes` (`make` VARCHAR(32) PRIMARY KEY);
 ALTER TABLE `booking`
 ADD
   FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE;
@@ -43,10 +37,10 @@ ADD
   FOREIGN KEY (`vehicle_id`) REFERENCES `vehicles` (`id`) ON DELETE CASCADE;
 ALTER TABLE `vehicles`
 ADD
-  FOREIGN KEY (`make`) REFERENCES `makes` (`id`);
+  FOREIGN KEY (`make`) REFERENCES `makes` (`make`);
 ALTER TABLE `vehicles`
 ADD
-  FOREIGN KEY (`color`) REFERENCES `colors` (`id`);
+  FOREIGN KEY (`color`) REFERENCES `colors` (`color`);
 INSERT INTO customers(
     `id`,
     `firstname`,
@@ -130,10 +124,10 @@ INSERT INTO vehicles(
     `created_at`
   )
 VALUES
-  ('ABC123', 1, 1, '2019', '400', NOW()),
-  ('XYZ789', 3, 2, '2014', '125', NOW()),
-  ('LOL666', 2, 3, '2005', '75', NOW()),
-  ('WOT999', 4, 5, '2011', '100', NOW());
+  ('ABC123', 'Tesla', 'Black', '2019', '400', NOW()),
+  ('XYZ789', 'Audi', 'White', '2014', '125', NOW()),
+  ('LOL666', 'Ford', 'Red', '2005', '75', NOW()),
+  ('WOT999', 'Volvo', 'Blue', '2011', '100', NOW());
 INSERT INTO booking(`customer_id`, `vehicle_id`, `rented_at`)
 VALUES
   ('9309230465', 'ABC123', NOW()),

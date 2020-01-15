@@ -43,8 +43,6 @@ class BookingModel extends AbstractModel
     $query = "SELECT * FROM booking 
                 JOIN customers ON customers.id = customer_id 
                 JOIN vehicles ON vehicles.id = vehicle_id 
-                JOIN makes ON makes.id = vehicles.make 
-                JOIN colors ON colors.id = vehicles.color
               ORDER BY booking.rented_at";
 
     try {

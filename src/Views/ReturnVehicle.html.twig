@@ -12,13 +12,15 @@
                             -- Select vehicle --
                         </option>
                         {% for vehicle in vehicles %}
-                            <option value="{{ vehicle.id }}">
-                                {{ vehicle.id }}
-                                –
-                                {{ vehicle.make }}
-                                ({{ vehicle.color }})
-                                {{ vehicle.price }}/day
-                            </option>
+                            {% if vehicle.editable == false %}
+                                <option value="{{ vehicle.id }}">
+                                    {{ vehicle.id }}
+                                    –
+                                    {{ vehicle.make }}
+                                    ({{ vehicle.color }})
+                                    {{ vehicle.price }}/day
+                                </option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                 </td>
