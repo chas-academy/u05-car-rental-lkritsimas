@@ -2,18 +2,18 @@ DROP DATABASE IF EXISTS `u05-car-rental`;
 CREATE DATABASE `u05-car-rental`;
 USE `u05-car-rental`;
 CREATE TABLE `customers` (
-  `id` VARCHAR(10) PRIMARY KEY,
+  `id` CHAR(10) PRIMARY KEY,
   `firstname` VARCHAR(255) NOT NULL,
   `surname` VARCHAR(255) NOT NULL,
   `address` VARCHAR(255) NOT NULL,
-  `postcode` VARCHAR(5) NOT NULL,
+  `postcode` CHAR(5) NOT NULL,
   `city` VARCHAR(255) NOT NULL,
-  `phone` VARCHAR(10) NOT NULL,
+  `phone` CHAR(10) NOT NULL,
   `created_at` DATETIME NOT NULL,
   `edited_at` DATETIME NULL
 );
 CREATE TABLE `vehicles` (
-  `id` VARCHAR(6) PRIMARY KEY,
+  `id` CHAR(6) PRIMARY KEY,
   `make` INT UNSIGNED NOT NULL,
   `color` INT UNSIGNED NOT NULL,
   `year` YEAR NOT NULL,
@@ -22,8 +22,8 @@ CREATE TABLE `vehicles` (
 );
 CREATE TABLE `booking` (
   `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  `customer_id` VARCHAR(10) NOT NULL,
-  `vehicle_id` VARCHAR(6) NOT NULL,
+  `customer_id` CHAR(10) NOT NULL,
+  `vehicle_id` CHAR(6) NOT NULL,
   `rented_at` DATETIME NOT NULL,
   `returned_at` DATETIME NULL
 );

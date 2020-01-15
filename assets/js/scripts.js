@@ -1,69 +1,14 @@
-// // Toggle action buttons on table row click
-// document.querySelectorAll("table#customers tr").forEach(function(rowEl) {
-//     rowEl.addEventListener("click", function(e) {
-//         rowEl.classList.toggle("selected");
-//         this.querySelectorAll("button[data-target]").forEach(function(
-//             buttonEl
-//         ) {
-//             buttonEl.classList.toggle("hide");
-//         });
-//     });
-// });
-
-// // Toggle action buttons on table row click
-// document.querySelectorAll("table#vehicles tr").forEach(function(rowEl) {
-//     rowEl.addEventListener("click", function(e) {
-//         rowEl.classList.toggle("selected");
-//         this.querySelectorAll("button[data-target]").forEach(function(
-//             buttonEl
-//         ) {
-//             buttonEl.classList.toggle("hide");
-//         });
-//     });
-// });
-
-// Luhn algorithm
-// https://gist.github.com/DiegoSalazar/4075533
-// https://sv.wikipedia.org/wiki/Luhn-algoritmen
-function checkLuhn(value) {
-    if (/[^0-9]+/.test(value)) return false;
-
-    let nCheck = 0;
-    let bEven = false;
-    value = value.replace(/\D/g, "");
-
-    for (let n = value.length - 1; n >= 0; n--) {
-        let cDigit = value.charAt(n);
-        let nDigit = parseInt(cDigit, 10);
-
-        if (bEven && (nDigit *= 2) > 9) nDigit -= 9;
-
-        nCheck += nDigit;
-        bEven = !bEven;
-    }
-
-    return nCheck % 10 == 0;
-}
-
 function validateDate(date) {
-    let isValid;
-
     let dob = new Date(date);
     let today = new Date();
     let past = new Date("1900-01-01");
 
-    if (
+    return (
         isNaN(dob) ||
         +dob > +today ||
         +dob < +past ||
         new Date(dob.getFullYear() + 18, dob.getMonth(), dob.getDate()) >= today
-    ) {
-        isValid = false;
-    } else {
-        isValid = true;
-    }
-
-    return isValid;
+    );
 }
 
 // Validate vehicle form
