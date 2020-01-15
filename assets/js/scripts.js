@@ -116,20 +116,14 @@ if (customerForm) {
     });
 }
 
-// Remove vehicle
-document
-    .querySelectorAll('[data-target="removeVehicle"]')
-    .forEach(function(buttonEl) {
+function addRowRemoveListener(elements, type) {
+    document.querySelectorAll(elements).forEach(function(buttonEl) {
         buttonEl.addEventListener("click", function(e) {
-            e.stopPropagation();
-
             // Table row for corresponding vehicle ID
             let row = event.target.parentNode.parentNode;
-            let vehicleId = this.dataset.id;
-            let removeVehicle = confirm(
-                `Remove vehicle with id "${vehicleId}"?`
-            );
-            if (removeVehicle !== true) return;
+            let id = this.dataset.id;
+            let confirmed = confirm(`Remove ${type} with id "${id}"?`);
+            if (confirmed !== true) return;
 
             let xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function() {
@@ -146,50 +140,15 @@ document
                 }
             };
 
-            xhr.open("POST", `/vehicles/remove/${vehicleId}`, false);
+            xhr.open("POST", `/${type}/remove/${id}`, false);
             xhr.setRequestHeader(
                 "Content-Type",
                 "application/x-www-form-urlencoded"
             );
-            xhr.send(`id=${vehicleId}`);
+            xhr.send(`id=${id}`);
         });
     });
+}
 
-// Remove customer
-document
-    .querySelectorAll('[data-target="removeCustomer"]')
-    .forEach(function(buttonEl) {
-        buttonEl.addEventListener("click", function(e) {
-            e.stopPropagation();
-
-            // Table row for corresponding customer ID
-            let row = event.target.parentNode.parentNode;
-            let customerId = this.dataset.id;
-            let removeCustomer = confirm(
-                `Remove customer with id "${customerId}"?`
-            );
-            if (removeCustomer !== true) return;
-
-            let xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.status === 200) {
-                    // Check if request was successful
-                    let parsedResponse = JSON.parse(xhr.response);
-
-                    // Remove row if so
-                    if (parsedResponse.success) {
-                        row.remove();
-                    } else {
-                        alert("Error: Something went wrong!");
-                    }
-                }
-            };
-
-            xhr.open("POST", `/customers/remove/${customerId}`, false);
-            xhr.setRequestHeader(
-                "Content-Type",
-                "application/x-www-form-urlencoded"
-            );
-            xhr.send(`id=${customerId}`);
-        });
-    });
+addRowRemoveListener('[data-target="removeCustomer"]', `customers`);
+addRowRemoveListener('[data-target="removeVehicle"]', `vehicles`);
