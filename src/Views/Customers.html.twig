@@ -14,7 +14,6 @@
                 <th>Postcode</th>
                 <th>City</th>
                 <th>Phone number</th>
-                <th>Registered at</th>
                 <th colspan="2"></th>
             </tr>
         </thead>
@@ -28,7 +27,6 @@
                     <td>{{ customer.postcode }}</td>
                     <td>{{ customer.city }}</td>
                     <td>{{ customer.phone }}</td>
-                    <td>{{ customer.created_at }}</td>
                     {% if customer.editable == false %}
                         {% set isBooked = false %}
                     {% else %}

@@ -47,7 +47,8 @@ class CustomerController extends AbstractController
     $customers = $customerModel->getCustomers();
 
     foreach ($customers as $key => $customer) {
-      $customers[$key]['editable'] = $bookingModel->isBookingActive($customer['id']);
+      $bookingDetails = $bookingModel->getBookingDetails($customer['id']);
+      $customers[$key]["editable"] = $bookingDetails["active"];
     }
 
     return $this->render("Customers.html.twig", [

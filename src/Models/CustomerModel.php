@@ -10,10 +10,7 @@ class CustomerModel extends AbstractModel
   public function getCustomers()
   {
     $result = [];
-    $query = "SELECT 
-                customers.*
-              FROM customers
-              ORDER BY customers.created_at";
+    $query = "SELECT * FROM customers ORDER BY created_at";
 
     try {
       // Perform query
@@ -36,10 +33,7 @@ class CustomerModel extends AbstractModel
   public function getCustomer($id)
   {
     $result = [];
-    $query = "SELECT 
-                *
-              FROM customers
-              WHERE id = :id";
+    $query = "SELECT * FROM customers WHERE id = :id";
 
     try {
       // Perform query

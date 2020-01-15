@@ -30,7 +30,8 @@ class BookingController extends AbstractController
 
     $vehicles = $vehicleModel->getVehicles();
     foreach ($vehicles as $key => $vehicle) {
-      $vehicles[$key]['editable'] = !$bookingModel->isBookingActive($vehicle['id'], 'vehicle');
+      $bookingDetails = $bookingModel->getBookingDetails($vehicle['id'], 'vehicle');
+      $vehicles[$key]["editable"] = !$bookingDetails["active"];
     }
 
     return $this->render("RentVehicle.html.twig", [
@@ -62,7 +63,8 @@ class BookingController extends AbstractController
 
     $vehicles = $vehicleModel->getVehicles();
     foreach ($vehicles as $key => $vehicle) {
-      $vehicles[$key]['editable'] = !$bookingModel->isBookingActive($vehicle['id'], 'vehicle');
+      $bookingDetails = $bookingModel->getBookingDetails($vehicle['id'], 'vehicle');
+      $vehicles[$key]["editable"] = !$bookingDetails["active"];
     }
 
     return $this->render("ReturnVehicle.html.twig", [

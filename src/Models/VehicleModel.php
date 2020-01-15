@@ -44,13 +44,10 @@ class VehicleModel extends AbstractModel
     return $result;
   }
 
-  public function getVehicles($isAvailable = null)
+  public function getVehicles()
   {
     $result = [];
-    $query = "SELECT 
-                *
-              FROM vehicles
-              ORDER BY created_at";
+    $query = "SELECT * FROM vehicles ORDER BY created_at";
 
     try {
       // Perform query
@@ -73,10 +70,7 @@ class VehicleModel extends AbstractModel
   public function getVehicle($id)
   {
     $result = [];
-    $query = "SELECT 
-                *
-              FROM vehicles
-              WHERE id = :id";
+    $query = "SELECT * FROM vehicles WHERE id = :id";
 
     try {
       // Perform query

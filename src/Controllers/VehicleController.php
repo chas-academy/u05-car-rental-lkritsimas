@@ -31,7 +31,10 @@ class VehicleController extends AbstractController
     $vehicles = $vehicleModel->getVehicles();
 
     foreach ($vehicles as $key => $vehicle) {
-      $vehicles[$key]['editable'] = $bookingModel->isBookingActive($vehicle['id'], 'vehicle');
+      $bookingDetails = $bookingModel->getBookingDetails($vehicle['id'], 'vehicle');
+      $vehicles[$key]["customer_id"] = $bookingDetails["customer_id"];
+      $vehicles[$key]["rented_at"] = $bookingDetails["rented_at"];
+      $vehicles[$key]["editable"] = $bookingDetails["active"];
     }
 
     return $this->render("Vehicles.html.twig", [

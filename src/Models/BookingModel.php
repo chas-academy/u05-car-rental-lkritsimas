@@ -7,10 +7,13 @@ use CarRental\Exceptions\DatabaseException;
 
 class BookingModel extends AbstractModel
 {
-  public function isBookingActive($id, $type = 'customer')
+  public function getBookingDetails($id, $type = 'customer')
   {
     $result = [];
-    $query = "SELECT COALESCE(returned_at, TRUE) AS active 
+    $query = "SELECT 
+                customer_id,
+                rented_at, 
+                COALESCE(returned_at, TRUE) AS active 
               FROM booking";
     if ($type === 'customer')
       $query .= " WHERE customer_id = :id";
@@ -24,7 +27,12 @@ class BookingModel extends AbstractModel
 
       $statement->execute([':id' => $id]);
       $result = $statement->fetch();
-      $result = (!empty($result) ? true : false);
+      // $result = (!empty($result) ? true : false);
+      $result = [
+        "customer_id" => $result["customer_id"],
+        "rented_at" => $result["rented_at"],
+        "active" => (bool) $result["active"],
+      ];
 
       // Render error page
     } catch (DatabaseException $e) {
