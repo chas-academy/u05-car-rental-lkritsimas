@@ -35,10 +35,6 @@
         "controller": "BookingController",
         "method": "rent"
     },
-    "rent/new": {
-        "controller": "BookingController",
-        "method": "addBooking"
-    },
     "return": {
         "controller": "BookingController",
         "method": "return"
