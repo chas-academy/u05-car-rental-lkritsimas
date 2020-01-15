@@ -122,7 +122,11 @@ function addRowRemoveListener(elements, type) {
             // Table row for corresponding vehicle ID
             let row = event.target.parentNode.parentNode;
             let id = this.dataset.id;
-            let confirmed = confirm(`Remove ${type} with id "${id}"?`);
+
+            // Show confirmation dialog and singularize type
+            let confirmed = confirm(
+                `Remove ${type.substring(0, type.length - 1)} with id "${id}"?`
+            );
             if (confirmed !== true) return;
 
             let xhr = new XMLHttpRequest();
