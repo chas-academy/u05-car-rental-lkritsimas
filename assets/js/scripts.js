@@ -103,8 +103,10 @@ if (customerForm) {
         if (!/^[0-9]{5}$/.test(postcode.value)) {
             errors.push("Postcode must consist of 5 digits");
         }
-        if (!/^[0]/.test(phone.value)) {
-            errors.push("Phone number must begin with the digit zero");
+        if (!/^[0][0-9]{9}/.test(phone.value)) {
+            errors.push(
+                "Phone number must begin with the digit zero and consist of 10 characters"
+            );
         }
 
         // Display errors or submit form
