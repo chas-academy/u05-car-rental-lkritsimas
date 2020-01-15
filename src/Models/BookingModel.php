@@ -51,7 +51,7 @@ class BookingModel extends AbstractModel
     $query = "SELECT * FROM booking 
                 JOIN customers ON customers.id = customer_id 
                 JOIN vehicles ON vehicles.id = vehicle_id 
-              ORDER BY booking.rented_at";
+              ORDER BY booking.returned_at DESC";
 
     try {
       // Perform query

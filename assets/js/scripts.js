@@ -42,7 +42,7 @@ if (vehicleForm) {
         if (!color.length) {
             errors.push("Color must be selected");
         }
-        if (parsedYear < 1901 || +new Date(year) > +dateToday) {
+        if (parsedYear < 1900 || +new Date(year) > +dateToday) {
             errors.push(
                 `Year must be a value between 1900 and ${dateToday.getFullYear()}`
             );

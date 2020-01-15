@@ -16,7 +16,7 @@ CREATE TABLE `vehicles` (
   `id` CHAR(6) PRIMARY KEY,
   `make` VARCHAR(32) NOT NULL,
   `color` VARCHAR(32) NOT NULL,
-  `year` YEAR NOT NULL,
+  `year` SMALLINT(4) NOT NULL,
   `price` DECIMAL(8, 2) NOT NULL,
   `created_at` DATETIME NOT NULL
 );
