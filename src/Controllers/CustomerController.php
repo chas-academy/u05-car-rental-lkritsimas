@@ -8,38 +8,6 @@ use CarRental\Models\BookingModel;
 
 class CustomerController extends AbstractController
 {
-  public function newCustomer()
-  {
-    return $this->render("NewCustomer.html.twig", [
-      "route" => "customers",
-      "success" => null
-    ]);
-  }
-
-  public function edit($data)
-  {
-    $customerModel = new CustomerModel($this->db);
-    $customerUpdated = null;
-
-    // Update customer if request method is POST
-    if ($this->request->getMethod() === "POST") {
-      $data = $this->request->getData();
-
-      if (empty($data))
-        throw new HTTPException("No POST data was provided", 500);
-      else
-        $customerUpdated = $customerModel->updateCustomer($data["id"], $data["firstname"], $data["surname"], $data["address"], $data["postcode"], $data["city"], $data["phone"]);
-    }
-
-    $customer = $customerModel->getCustomer($data["id"]);
-
-    return $this->render("EditCustomer.html.twig", [
-      "route" => "customers",
-      "success" => $customerUpdated,
-      "customer" => $customer
-    ]);
-  }
-
   public function get()
   {
     $customerModel = new CustomerModel($this->db);
@@ -78,22 +46,31 @@ class CustomerController extends AbstractController
     ]);
   }
 
-  public function update()
+  public function update($data)
   {
-    $data = $this->request->getData();
-    if (empty($data)) throw new HTTPException("No POST data was provided", 500);
+    $customerModel = new CustomerModel($this->db);
+    $customerUpdated = null;
 
-    $customerModel = new customerModel($this->db);
-    $customer = $customerModel->updateCustomer($data["id"], $data["firstname"], $data["surname"], $data["address"], $data["postcode"], $data["city"], $data["phone"]);
+    // Update customer if request method is POST
+    if ($this->request->getMethod() === "POST") {
+      $data = $this->request->getData();
+
+      if (empty($data))
+        throw new HTTPException("No POST data was provided", 500);
+      else
+        $customerUpdated = $customerModel->updateCustomer($data["id"], $data["firstname"], $data["surname"], $data["address"], $data["postcode"], $data["city"], $data["phone"]);
+    }
+
+    $customer = $customerModel->getCustomer($data["id"]);
 
     return $this->render("EditCustomer.html.twig", [
       "route" => "customers",
-      "success" => null,
+      "success" => $customerUpdated,
       "customer" => $customer
     ]);
   }
 
-  public function remove()
+  public function delete()
   {
     $data = $this->request->getData();
 

@@ -8,21 +8,6 @@ use CarRental\Models\BookingModel;
 
 class VehicleController extends AbstractController
 {
-  // Render the new vehicle view
-  public function newVehicle()
-  {
-    $vehicleModel = new VehicleModel($this->db);
-    $makes = $vehicleModel->getMakes();
-    $colors = $vehicleModel->getColors();
-
-    return $this->render("NewVehicle.html.twig", [
-      "route" => "vehicles",
-      "makes" => $makes,
-      "colors" => $colors,
-      "success" => null
-    ]);
-  }
-
   // Get all vehicles
   public function get()
   {
@@ -71,7 +56,7 @@ class VehicleController extends AbstractController
   }
 
   // Edit vehicle
-  public function edit($data)
+  public function update($data)
   {
     $vehicleModel = new VehicleModel($this->db);
     $vehicleUpdated = null;
@@ -100,7 +85,7 @@ class VehicleController extends AbstractController
   }
 
   // Remove vehicle
-  public function remove()
+  public function delete()
   {
     $data = $this->request->getData();
 

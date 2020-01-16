@@ -9,11 +9,11 @@
     },
     "vehicles/edit/{id}": {
         "controller": "VehicleController",
-        "method": "edit"
+        "method": "update"
     },
     "vehicles/remove/{id}": {
         "controller": "VehicleController",
-        "method": "remove"
+        "method": "delete"
     },
     "customers": {
         "controller": "CustomerController",
@@ -25,11 +25,11 @@
     },
     "customers/edit/{id}": {
         "controller": "CustomerController",
-        "method": "edit"
+        "method": "update"
     },
     "customers/remove/{id}": {
         "controller": "CustomerController",
-        "method": "remove"
+        "method": "delete"
     },
     "rent": {
         "controller": "BookingController",
