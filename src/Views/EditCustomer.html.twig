@@ -2,7 +2,7 @@
 {% set title = 'Edit customer' %}
 {% block content %}
     <h2>Edit customer</h2>
-    <form id="customer" method="POST" action="/customers/edit/{{ customer.id }}">
+    <form id="customer" method="POST" action="/customers/{{ customer.id }}/edit">
         <input type="hidden" name="id" value="{{ customer.id }}"/>
         <table>
             <tr>

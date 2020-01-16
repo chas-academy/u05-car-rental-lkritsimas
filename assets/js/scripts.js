@@ -146,7 +146,7 @@ function addRowRemoveListener(elements, type) {
                 }
             };
 
-            xhr.open("POST", `/${type}/remove/${id}`, false);
+            xhr.open("POST", `/${type}/${id}/remove`, false);
             xhr.setRequestHeader(
                 "Content-Type",
                 "application/x-www-form-urlencoded"

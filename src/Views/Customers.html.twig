@@ -33,7 +33,7 @@
                         {% set isBooked = true %}
                     {% endif %}
                     <td>
-                        <a href="customers/edit/{{ customer.id }}" class="btn small {{ (isBooked) ? 'disabled' : '' }}">
+                        <a href="customers/{{ customer.id }}/edit" class="btn small {{ (isBooked) ? 'disabled' : '' }}">
                             Edit
                         </a>
                     </td>

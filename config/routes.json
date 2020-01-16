@@ -7,11 +7,11 @@
         "controller": "VehicleController",
         "method": "add"
     },
-    "vehicles/edit/{id}": {
+    "vehicles/{id}/edit": {
         "controller": "VehicleController",
         "method": "update"
     },
-    "vehicles/remove/{id}": {
+    "vehicles/{id}/remove": {
         "controller": "VehicleController",
         "method": "delete"
     },
@@ -23,11 +23,11 @@
         "controller": "CustomerController",
         "method": "add"
     },
-    "customers/edit/{id}": {
+    "customers/{id}/edit": {
         "controller": "CustomerController",
         "method": "update"
     },
-    "customers/remove/{id}": {
+    "customers/{id}/remove": {
         "controller": "CustomerController",
         "method": "delete"
     },

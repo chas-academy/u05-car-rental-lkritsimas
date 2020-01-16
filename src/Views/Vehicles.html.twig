@@ -34,7 +34,7 @@
                         <td>{{ vehicle.rented_at }}</td>
                     {% endif %}
                     <td>
-                        <a href="vehicles/edit/{{ vehicle.id }}" class="btn small {{ (isBooked) ? 'disabled' : '' }}">
+                        <a href="vehicles/{{ vehicle.id }}/edit" class="btn small {{ (isBooked) ? 'disabled' : '' }}">
                             Edit
                         </a>
                     </td>
