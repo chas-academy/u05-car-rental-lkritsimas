@@ -68,7 +68,7 @@ VALUES
     'Jobs',
     'RIP',
     '99999',
-    'Silicon Valley',
+    'None',
     '0709999999',
     NOW()
   ),
