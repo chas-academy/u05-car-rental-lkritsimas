@@ -31,10 +31,14 @@ CREATE TABLE `colors` (`color` VARCHAR(32) PRIMARY KEY);
 CREATE TABLE `makes` (`make` VARCHAR(32) PRIMARY KEY);
 ALTER TABLE `booking`
 ADD
-  FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE CASCADE;
+  FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`) ON DELETE
+SET
+  NULL;
 ALTER TABLE `booking`
 ADD
-  FOREIGN KEY (`vehicle_id`) REFERENCES `vehicles` (`id`) ON DELETE CASCADE;
+  FOREIGN KEY (`vehicle_id`) REFERENCES `vehicles` (`id`) ON DELETE
+SET
+  NULL;
 ALTER TABLE `vehicles`
 ADD
   FOREIGN KEY (`make`) REFERENCES `makes` (`make`);
