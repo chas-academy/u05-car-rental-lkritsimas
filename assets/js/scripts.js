@@ -1,14 +1,45 @@
-function validateDate(date) {
-    let dob = new Date(date);
+/*
+ * Validates a date of birth between 1900-01-01 and current date, also checks if age is 18+
+ *
+ * This part of the assignment makes no sense as there is no way of properly validating a date of birth without a full year (i.e. YYYY)
+ * We should be storing the full date of birth.
+ * See: https://sv.wikipedia.org/wiki/Personnummer_i_Sverige#Personnumrets_uppbyggnad
+ *
+ * Should people under 18 really be renting cars?
+ */
+function validateDate(yy, mm, dd) {
     let today = new Date();
+    let todayYY = today
+        .getFullYear()
+        .toString()
+        .substr(2, 4);
+
+    // Check if given year is before current year and apply century
+    let yyyy = +yy < todayYY ? "20" + yy : "19" + yy;
+    let dob = new Date(`${yyyy}-${mm}-${dd}`);
     let past = new Date("1900-01-01");
 
     return !(
         isNaN(dob) ||
-        +dob > +today ||
         +dob < +past ||
-        new Date(dob.getFullYear() + 18, dob.getMonth(), dob.getDate()) >= today
+        new Date(dob.getFullYear() + 18, dob.getMonth(), dob.getDate()) >=
+            +today
     );
+}
+
+// Validate control number
+function validateControlNumber(num) {
+    let sum = num
+        .split("")
+        .reverse()
+        .map(n => +n)
+        .reduce((previous, current, index) => {
+            if (index % 2) current *= 2;
+            if (current > 9) current -= 9;
+            return previous + current;
+        });
+
+    return 0 === sum % 10;
 }
 
 // Validate vehicle form
@@ -80,13 +111,11 @@ if (customerForm) {
         let idMatch = id.value.match(
             /^([0-9]{2})([0-9]{2})([0-9]{2})[0-9]{4}$/
         );
-        let validId = false;
-        if (idMatch) {
-            validId = validateDate(`${idMatch[1]}-${idMatch[2]}-${idMatch[3]}`);
-        }
-
-        if (!validId) {
+        if (idMatch && !validateDate(idMatch[1], idMatch[2], idMatch[3])) {
             errors.push("Personal identity number must have a valid date");
+        }
+        if (idMatch && !validateControlNumber(id.value)) {
+            errors.push("Control number is incorrect");
         }
         if (firstname.value.length < 2) {
             errors.push("First name must consist of 2 or more characters");
@@ -98,7 +127,7 @@ if (customerForm) {
             errors.push("Address must consist of 1 or more characters");
         }
         if (city.value.length < 2) {
-            errors.push("city must consist of 2 or more characters");
+            errors.push("City must consist of 2 or more characters");
         }
         if (!/^[0-9]{5}$/.test(postcode.value)) {
             errors.push("Postcode must consist of 5 digits");
