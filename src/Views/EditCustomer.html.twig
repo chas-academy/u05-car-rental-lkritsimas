@@ -14,37 +14,37 @@
             <tr>
                 <th>First name</th>
                 <td>
-                    <input name="firstname" value="{{ customer.firstname }}"/>
+                    <input name="firstname" value="{{ customer.firstname }}" required/>
                 </td>
             </tr>
             <tr>
                 <th>Surname</th>
                 <td>
-                    <input name="surname" value="{{ customer.surname }}"/>
+                    <input name="surname" value="{{ customer.surname }}" required/>
                 </td>
             </tr>
             <tr>
                 <th>Address</th>
                 <td>
-                    <input name="address" value="{{ customer.address }}"/>
+                    <input name="address" value="{{ customer.address }}" required/>
                 </td>
             </tr>
             <tr>
                 <th>Post code</th>
                 <td>
-                    <input name="postcode" maxlength="5" value="{{ customer.postcode }}"/>
+                    <input name="postcode" maxlength="5" value="{{ customer.postcode }}" required/>
                 </td>
             </tr>
             <tr>
                 <th>City</th>
                 <td>
-                    <input name="city" value="{{ customer.city }}"/>
+                    <input name="city" value="{{ customer.city }}" required/>
                 </td>
             </tr>
             <tr>
                 <th>Phone number</th>
                 <td>
-                    <input name="phone" maxlength="10" value="{{ customer.phone }}"/>
+                    <input name="phone" maxlength="10" value="{{ customer.phone }}" required/>
                 </td>
             </tr>
             <tfoot>

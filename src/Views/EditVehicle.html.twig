@@ -14,7 +14,7 @@
             <tr>
                 <th>Make</th>
                 <td>
-                    <select name="make" placeholder="Select make">
+                    <select name="make" placeholder="Select make" required>
                         {% for make in makes %}
                             <option {{ vehicle.make == make.make ? "selected" : "" }} value="{{ make.make }}">{{ make.make }}</option>
                         {% endfor %}
@@ -24,7 +24,7 @@
             <tr>
                 <th>Color</th>
                 <td>
-                    <select name="color" placeholder="Select color">
+                    <select name="color" placeholder="Select color" required>
                         {% for color in colors %}
                             <option {{ vehicle.color == color.color ? "selected" : "" }} value="{{ color.color }}">{{ color.color }}</option>
                         {% endfor %}
@@ -34,13 +34,13 @@
             <tr>
                 <th>Year</th>
                 <td>
-                    <input name="year" placeholder="YYYY" maxlength="4" value="{{ vehicle.year }}"/>
+                    <input name="year" placeholder="YYYY" maxlength="4" value="{{ vehicle.year }}" required/>
                 </td>
             </tr>
             <tr>
                 <th>Price</th>
                 <td>
-                    <input name="price" placeholder="0.00" value="{{ vehicle.price }}"/>
+                    <input name="price" placeholder="0.00" value="{{ vehicle.price }}" required/>
                 </td>
             </tr>
             <tfoot>
