@@ -23,6 +23,7 @@ class Router
     $path = $request->getPath();
 
     try {
+      // Is path static?
       if (array_key_exists($path, $this->routes)) {
         $values = array_values($this->routes[$path]);
         return $this->callAction($request, ...$values);
@@ -33,6 +34,7 @@ class Router
           // Remove full match
           array_shift($matches);
 
+          // Route if matched
           if ($matches) {
             return $this->callAction($request, $data["controller"], $data["method"], $matches);
           }
