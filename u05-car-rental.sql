@@ -9,8 +9,7 @@ CREATE TABLE `customers` (
   `postcode` CHAR(5) NOT NULL,
   `city` VARCHAR(255) NOT NULL,
   `phone` CHAR(10) NOT NULL,
-  `created_at` DATETIME NOT NULL,
-  `edited_at` DATETIME NULL
+  `created_at` DATETIME NOT NULL
 );
 CREATE TABLE `vehicles` (
   `id` CHAR(6) PRIMARY KEY,
@@ -22,8 +21,8 @@ CREATE TABLE `vehicles` (
 );
 CREATE TABLE `booking` (
   `id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  `customer_id` CHAR(10) NOT NULL,
-  `vehicle_id` CHAR(6) NOT NULL,
+  `customer_id` CHAR(10) NULL,
+  `vehicle_id` CHAR(6) NULL,
   `rented_at` DATETIME NOT NULL,
   `returned_at` DATETIME NULL
 );
@@ -109,15 +108,27 @@ VALUES
 INSERT INTO colors(`color`)
 VALUES
   ('Black'),
-  ('White'),
-  ('Red'),
+  ('Blue'),
+  ('Brown'),
+  ('Gray'),
   ('Green'),
-  ('Blue');
+  ('Orange'),
+  ('Pink'),
+  ('Purple'),
+  ('Red'),
+  ('White'),
+  ('Yellow');
 INSERT INTO makes(`make`)
 VALUES
-  ('Tesla'),
-  ('Ford'),
   ('Audi'),
+  ('BMW'),
+  ('Ferrari'),
+  ('Ford'),
+  ('Lamborghini'),
+  ('Porsche'),
+  ('Tesla'),
+  ('Toyota'),
+  ('Volkswagen'),
   ('Volvo');
 INSERT INTO vehicles(
     `id`,
@@ -128,13 +139,20 @@ INSERT INTO vehicles(
     `created_at`
   )
 VALUES
-  ('ABC123', 'Tesla', 'Black', '2019', '400', NOW()),
+  ('ABC123', 'Tesla', 'Black', '2019', '500', NOW()),
   ('XYZ789', 'Audi', 'White', '2014', '125', NOW()),
-  ('LOL666', 'Ford', 'Red', '2005', '75', NOW()),
-  ('WOT999', 'Volvo', 'Blue', '2011', '100', NOW());
+  ('LOL666', 'Ford', 'Green', '2005', '75', NOW()),
+  ('WOT999', 'Volvo', 'Blue', '2011', '100', NOW()) (
+    'RIK001',
+    'Lamborghini',
+    'Orange',
+    '2016',
+    '1000',
+    NOW()
+  ),
+  ('AJA01X', 'Ferrari', 'Red', '2012', '900', NOW()),
+  ('HEJ555', 'Ford', 'Yellow', '1999', '900', NOW());
 INSERT INTO booking(`customer_id`, `vehicle_id`, `rented_at`)
 VALUES
   ('9309230465', 'ABC123', NOW()),
-  ('9209258087', 'XYZ789', NOW()),
-  ('6302254344', 'LOL666', NOW()),
-  ('6107280833', 'WOT999', NOW());
+  ('9209258087', 'XYZ789', NOW());

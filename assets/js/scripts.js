@@ -58,11 +58,11 @@ if (vehicleForm) {
         let price = document.querySelector("input[name=price]").value;
 
         let parsedYear = parseInt(year, 10) || 0;
-        let parsedPrice = parseInt(price, 10) || 0;
+        let parsedPrice = parseFloat(price, 10) || 0;
 
         let dateToday = new Date();
 
-        if (!/^[A-Z]{3}([0-9]{3}|[0-9]{2}[A-Z]{1})$/.test(id)) {
+        if (!/^[A-Z]{3}(\d{3}|\d{2}[A-Z]{1})$/.test(id)) {
             errors.push(
                 "License plate number must contain 3 characters A-Z followed by 3 digits 0-9 or 3 characters A-Z followed by 2 digits 0-9 followed by 1 character A-Z. E.g. ABC123, ABC12X"
             );
@@ -78,7 +78,7 @@ if (vehicleForm) {
                 `Year must be a value between 1900 and ${dateToday.getFullYear()}`
             );
         }
-        if (parsedPrice < 1) {
+        if (parsedPrice <= 0) {
             errors.push("Price must have a positive value");
         }
 
