@@ -28,7 +28,6 @@ class Router
         return $this->callAction($request, ...$values);
       } else {
         foreach ($this->routes as $route => $data) {
-          // $pattern = preg_replace("#\(/\)#", "/?", $route);
           $pattern = "@^" . preg_replace("/{([a-zA-Z0-9\_\-]+)}/", "(?<$1>[a-zA-Z0-9\_\-]+)", $route) . "$@D";
           preg_match($pattern, $path, $matches);
           // Remove full match
