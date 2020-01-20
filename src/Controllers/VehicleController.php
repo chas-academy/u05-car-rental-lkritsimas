@@ -39,6 +39,8 @@ class VehicleController extends AbstractController
 
       if (empty($data))
         throw new HTTPException("No POST data was provided", 500);
+      else if (empty($data["id"]) || empty($data["make"]) || empty($data["color"]) || empty($data["year"]) || empty($data["price"]))
+        $created = false;
       else
         $created = $vehicleModel->addVehicle(strtoupper($data["id"]), $data["make"], $data["color"], $data["year"], $data["price"]);
     }

@@ -35,6 +35,8 @@ class CustomerController extends AbstractController
 
       if (empty($data))
         throw new HTTPException("No POST data was provided", 500);
+      else if (empty($data["id"]) || empty($data["firstname"]) || empty($data["surname"]) || empty($data["address"]) || empty($data["postcode"]) || empty($data["city"]) || empty($data["phone"]))
+        $created = false;
       else
         $created = $customerModel->addCustomer($data["id"], $data["firstname"], $data["surname"], $data["address"], $data["postcode"], $data["city"], $data["phone"]);
     }
