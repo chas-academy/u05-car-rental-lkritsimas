@@ -1,7 +1,7 @@
 /*
  * Validates a date of birth between 1900-01-01 and current date, also checks if age is 18+
  *
- * This part of the assignment makes no sense as there is no way of properly validating a date of birth without a full year (i.e. YYYY)
+ * This part of the assignment makes no sense as there is no way of properly validating a date of birth without a full year (e.g. YYYY)
  * We should be storing the full date of birth.
  * See: https://sv.wikipedia.org/wiki/Personnummer_i_Sverige#Personnumrets_uppbyggnad
  *

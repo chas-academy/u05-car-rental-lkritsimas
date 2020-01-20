@@ -142,7 +142,8 @@ VALUES
   ('ABC123', 'Tesla', 'Black', '2019', '500', NOW()),
   ('XYZ789', 'Audi', 'White', '2014', '125', NOW()),
   ('LOL666', 'Ford', 'Green', '2005', '75', NOW()),
-  ('WOT999', 'Volvo', 'Blue', '2011', '100', NOW()) (
+  ('WOT999', 'Volvo', 'Blue', '2011', '100', NOW()),
+  (
     'RIK001',
     'Lamborghini',
     'Orange',
